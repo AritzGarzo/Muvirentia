@@ -1,21 +1,29 @@
 package principal;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 import pantallas.PanelLogin;
 
 public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
 	Controlador controlador;
+	AbstractAction acc;
 
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
 		this.controlador = controlador;
+		controlador.addListener(this);
+		
 		panelVisual = new JPanel(new CardLayout());
 		this.setSize(1000, 600);
 		this.setLocation(200, 100);
@@ -24,9 +32,9 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	//---------------------------paneles---------------------------
-	
+
+	// ---------------------------paneles---------------------------
+
 	private JPanel crearPanelLogin() {
 		JPanel panel;
 		PanelLogin panelLogin = new PanelLogin();
@@ -41,24 +49,23 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		panelVisual.revalidate();
 		return panelVisual;
 	}
-	
-	//---------------------property change listener---------------------
+
+	// ---------------------property change listener---------------------
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String propiedad = evt.getPropertyName();
-		switch(propiedad) {
+		switch (propiedad) {
 		case Controlador.PANEL_PRINCIPAL:
 			break;
 		default:
-			
+
 		}
 	}
-	
-	
-	//----------------------------graficos----------------------------
-	
-	//------------------------------main------------------------------
+
+	// ----------------------------graficos----------------------------
+
+	// ------------------------------main------------------------------
 
 	public static void main(String[] args) {
 		Controlador controlador = new Controlador();
