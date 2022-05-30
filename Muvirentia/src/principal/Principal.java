@@ -1,18 +1,21 @@
 package principal;
 
 import java.awt.CardLayout;
-import java.awt.Container;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import pantallas.PanelLogin;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
+	Controlador controlador;
 
-	public Principal() {
+	public Principal(Controlador controlador) {
 		super("Muvirentia");
+		this.controlador = controlador;
 		panelVisual = new JPanel(new CardLayout());
 		this.setSize(1000, 600);
 		this.setLocation(200, 100);
@@ -21,7 +24,9 @@ public class Principal extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	
+	//---------------------------paneles---------------------------
+	
 	private JPanel crearPanelLogin() {
 		JPanel panel;
 		PanelLogin panelLogin = new PanelLogin();
@@ -36,15 +41,27 @@ public class Principal extends JFrame {
 		panelVisual.revalidate();
 		return panelVisual;
 	}
+	
+	//---------------------property change listener---------------------
 
-	private Container crearPanelVentana() {
-		JPanel panel = new JPanel();
-
-		return panel;
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		String propiedad = evt.getPropertyName();
+		switch(propiedad) {
+		case Controlador.PANEL_PRINCIPAL:
+			break;
+		default:
+			
+		}
 	}
+	
+	
+	//----------------------------graficos----------------------------
+	
+	//------------------------------main------------------------------
 
 	public static void main(String[] args) {
-		Principal programa = new Principal();
+		Controlador controlador = new Controlador();
+		Principal programa = new Principal(controlador);
 	}
-
 }
