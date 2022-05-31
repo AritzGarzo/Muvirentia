@@ -1,16 +1,12 @@
 package principal;
 
 import java.awt.CardLayout;
-import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JToolBar;
 
 import pantallas.PanelLogin;
 
@@ -29,8 +25,8 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.setLocation(200, 100);
 		this.setContentPane(panelVisual);
 		cambiarPanel(crearPanelLogin());
-		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 	}
 
 	// ---------------------------paneles---------------------------
