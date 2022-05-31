@@ -8,7 +8,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import pantallas.PanelFormulario;
 import pantallas.PanelLogin;
 import pantallas.PanelMenu;
 import pantallas.PanelPrincipal;
