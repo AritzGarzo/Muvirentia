@@ -15,11 +15,13 @@ import src.MiDialogo;
 
 public class Controlador implements ActionListener,ListSelectionListener {
 	public final static String PANEL_PRINCIPAL="panel_principal",
-			PANEL_FORMULARIO="panel_formulario",
 			PANEL_LOGIN="panel_login",
 			PANEL_GRAFICO="panel_grafico",
 			PANEL_MENU="panel_menu",
-			FORMULARIO="formulario";
+			FORMULARIO="formulario",
+			ADD_PLANTA="add_planta",
+			DEL_PLANTA="del_planta",
+			SISTEMA="sistema";
 	PropertyChangeSupport conector;
 	
 	public Controlador() {
@@ -41,9 +43,14 @@ public class Controlador implements ActionListener,ListSelectionListener {
 		case FORMULARIO:
 			MiDialogo dialogo = new MiDialogo(new JFrame(),"Formulario",true);
 			Formulario formulario = dialogo.getFormulario();
-			if(formulario!=null) conector.firePropertyChange("formulario", null, formulario);
+			if(formulario!=null) conector.firePropertyChange(FORMULARIO, null, formulario);
 			break;
-		case PANEL_GRAFICO:
+		case ADD_PLANTA:
+			break;
+		case DEL_PLANTA:
+			break;
+		case SISTEMA:
+			conector.firePropertyChange(SISTEMA, null, 12);
 			break;
 		default:
 		}

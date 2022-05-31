@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import pantallas.PanelFormulario;
 import pantallas.PanelLogin;
+import pantallas.PanelMenu;
 
 public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
@@ -18,9 +19,16 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
+<<<<<<< HEAD
 		this.setSize(1000, 600);
 		PanelFormulario f = new PanelFormulario(controlador);
 		this.setContentPane(f.getPanel());
+=======
+		this.setSize(800, 600);
+		PanelMenu panel = new PanelMenu(controlador);
+		this.setContentPane(panel.getPanel());
+		
+>>>>>>> f2ab4fdd9973035ec38c2b7e755879f55a9edf2c
 		/*this.controlador = controlador;
 		controlador.addListener(this);
 		
@@ -39,6 +47,13 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		JPanel panel;
 		PanelLogin panelLogin = new PanelLogin();
 		panel = panelLogin.getPanel();
+		return panel;
+	}
+	
+	private JPanel crearPanelMenu() {
+		JPanel panel;
+		PanelMenu panelMenu = new PanelMenu(controlador);
+		panel = panelMenu.getPanel();
 		return panel;
 	}
 
