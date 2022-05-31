@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import pantallas.PanelFormulario;
 import pantallas.PanelLogin;
 
 public class Principal extends JFrame implements PropertyChangeListener {
@@ -17,7 +18,10 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
-		this.controlador = controlador;
+		this.setSize(1000, 600);
+		PanelFormulario f = new PanelFormulario(controlador);
+		this.setContentPane(f.getPanel());
+		/*this.controlador = controlador;
 		controlador.addListener(this);
 		
 		panelVisual = new JPanel(new CardLayout());
@@ -25,7 +29,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.setLocation(200, 100);
 		this.setContentPane(panelVisual);
 		cambiarPanel(crearPanelLogin());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
 		this.setVisible(true);
 	}
 
