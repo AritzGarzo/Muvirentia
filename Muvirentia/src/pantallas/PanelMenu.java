@@ -14,6 +14,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
 import principal.Controlador;
@@ -26,6 +27,8 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	JButton bHome, bFormulario, bGrafico, bAddPlanta, bDelPlanta, bSistema;
 	JList<Formulario> jlFormularios;
 	List<Formulario> lFormularios;
+//	JList<Planta> jlPlantas;
+//	List<Planta> lPlantas;
 	boolean sistema=false;//true = sistema encendido | false = sistema apagado
 
 	public PanelMenu(Controlador controlador) {
@@ -36,7 +39,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		// definir como se ve el panel
 		panel = new JPanel(new BorderLayout(0, 10));
 		panel.add(crearPanelNorte(), BorderLayout.NORTH);
-		panel.add(crearPanelLista(), BorderLayout.CENTER);
+		panel.add(crearPanelCentro(), BorderLayout.CENTER);
 
 	}
 
@@ -81,7 +84,27 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		return panel;
 	}
 
-	private Component crearPanelLista() {
+
+	private Component crearPanelCentro() {
+		JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		split.add(crearPanelListaPlantas());
+		split.add(crearPanelListaFormularios());
+		return split;
+	}
+	
+
+	private Component crearPanelListaPlantas() {
+		JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//		jlPlantas = new JList<>();
+//		jlPlantas.setListData(lPlantas.toArray(new Planta[0]));
+//		jlPlantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+//		scroll.setViewportView(jlPlantas);
+		return scroll;
+	}
+
+	private Component crearPanelListaFormularios() {
 		JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jlFormularios = new JList<>();

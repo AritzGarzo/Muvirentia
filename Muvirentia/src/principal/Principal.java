@@ -10,26 +10,26 @@ import javax.swing.JPanel;
 
 import pantallas.PanelLogin;
 import pantallas.PanelMenu;
+import pantallas.PanelPrincipal;
 
 public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
 	Controlador controlador;
 	AbstractAction acc;
 
+	
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
 		this.setSize(800, 600);
-		PanelMenu panel = new PanelMenu(controlador);
-		this.setContentPane(panel.getPanel());
-		//kaiuxo;
+		panelVisual = new JPanel(new CardLayout());
+		this.setContentPane(panelVisual);
+		cambiarPanel(crearPanelPrincipal());
 		
 		/*this.controlador = controlador;
 		controlador.addListener(this);
 		
-		panelVisual = new JPanel(new CardLayout());
 		this.setSize(1000, 600);
 		this.setLocation(200, 100);
-		this.setContentPane(panelVisual);
 		cambiarPanel(crearPanelLogin());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
 		this.setVisible(true);
@@ -39,7 +39,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
 	private JPanel crearPanelLogin() {
 		JPanel panel;
-		PanelLogin panelLogin = new PanelLogin();
+		PanelLogin panelLogin = new PanelLogin(controlador);
 		panel = panelLogin.getPanel();
 		return panel;
 	}
@@ -48,6 +48,13 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		JPanel panel;
 		PanelMenu panelMenu = new PanelMenu(controlador);
 		panel = panelMenu.getPanel();
+		return panel;
+	}
+	
+	private JPanel crearPanelPrincipal() {
+		JPanel panel;
+		PanelPrincipal panelPrincipal = new PanelPrincipal(controlador);
+		panel = panelPrincipal.getPanel();
 		return panel;
 	}
 
@@ -68,7 +75,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		case Controlador.PANEL_PRINCIPAL:
 			break;
 		default:
-
 		}
 	}
 
