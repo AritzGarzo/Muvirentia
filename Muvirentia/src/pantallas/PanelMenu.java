@@ -55,7 +55,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		bGrafico.setActionCommand(Controlador.PANEL_GRAFICO);
 		bGrafico.addActionListener(controlador);
 
-		bAddPlanta = new JButton("Añadir planta");
+		bAddPlanta = new JButton("Aï¿½adir planta");
 		bAddPlanta.setActionCommand(Controlador.ADD_PLANTA);
 		bAddPlanta.addActionListener(controlador);
 
@@ -108,7 +108,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		switch(propiedad) {
 		case Controlador.FORMULARIO:
 			opcion = JOptionPane.showConfirmDialog(this,
-					"Todavía no se puede enviar el formulario, pero se puede guardar", "Elemento por incrementar",
+					"Todavï¿½a no se puede enviar el formulario, pero se puede guardar", "Elemento por incrementar",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (opcion == JOptionPane.OK_OPTION) {
 				Formulario formulario = (Formulario) evt.getNewValue();
@@ -117,11 +117,13 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 			}
 			break;
 		case Controlador.ADD_PLANTA:
+			
 			break;
 		case Controlador.DEL_PLANTA:
+			
 			break;
 		case Controlador.SISTEMA:
-			opcion = JOptionPane.showConfirmDialog(this, ((sistema)?"¿Quieres apagar el sistema?":"¿Quieres encender el sistema?"),
+			opcion = JOptionPane.showConfirmDialog(this, ((sistema)?"ï¿½Quieres apagar el sistema?":"ï¿½Quieres encender el sistema?"),
 					"Estado del sistema",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
 			if(sistema) {//sistema encendido
 				if(opcion == JOptionPane.YES_OPTION) {
