@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import baseDeDatos.ConexionDB;
 import pantallas.PanelLogin;
 import pantallas.PanelMenu;
 
@@ -15,12 +16,16 @@ public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
 	Controlador controlador;
 	AbstractAction acc;
+	ConexionDB db=new ConexionDB();
+
 
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
 		this.setSize(800, 600);
 		PanelMenu panel = new PanelMenu(controlador);
 		this.setContentPane(panel.getPanel());
+		db.getPlanta();
+	
 		
 		/*this.controlador = controlador;
 		controlador.addListener(this);
@@ -78,5 +83,6 @@ public class Principal extends JFrame implements PropertyChangeListener {
 	public static void main(String[] args) {
 		Controlador controlador = new Controlador();
 		Principal programa = new Principal(controlador);
+
 	}
 }
