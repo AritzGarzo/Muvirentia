@@ -21,6 +21,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.setSize(800, 600);
 		PanelMenu panel = new PanelMenu(controlador);
 		this.setContentPane(panel.getPanel());
+		//kaiuxo;
 		
 		/*this.controlador = controlador;
 		controlador.addListener(this);
