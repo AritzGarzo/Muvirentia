@@ -27,7 +27,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		panelVisual = new JPanel(new CardLayout());
 		this.setContentPane(panelVisual);
 		cambiarPanel(crearPanelPrincipal());
-		
+
 		/*this.controlador = controlador;
 		controlador.addListener(this);
 		
