@@ -34,7 +34,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-
+//prueba
 	// ---------------------------paneles---------------------------
 
 	private JPanel crearPanelLogin() {
