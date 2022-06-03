@@ -87,6 +87,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 
 	private Component crearPanelCentro() {
 		JSplitPane split = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+		split.setDividerLocation(250);
 		split.add(crearPanelListaPlantas());
 		split.add(crearPanelListaFormularios());
 		return split;
