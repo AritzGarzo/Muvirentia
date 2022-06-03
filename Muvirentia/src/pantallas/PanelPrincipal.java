@@ -103,5 +103,6 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 			valvula = !valvula;
 			bValvula.setText("Valvula: "+((valvula)?"ON":"OFF"));
 		}
+		
 	}
 }

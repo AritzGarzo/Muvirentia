@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import pantallas.PanelMenu;
 import src.Formulario;
 import src.MiDialogo;
 
@@ -44,6 +45,9 @@ public class Controlador implements ActionListener,ListSelectionListener {
 			MiDialogo dialogo = new MiDialogo(new JFrame(),"Formulario",true);
 			Formulario formulario = dialogo.getFormulario();
 			if(formulario!=null) conector.firePropertyChange(FORMULARIO, null, formulario);
+			break;
+		case PANEL_MENU:
+				conector.firePropertyChange(PANEL_MENU, null, 12);
 			break;
 		case ADD_PLANTA:
 			break;

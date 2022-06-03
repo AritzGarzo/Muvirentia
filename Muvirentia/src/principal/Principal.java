@@ -23,18 +23,15 @@ public class Principal extends JFrame implements PropertyChangeListener {
 	
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
-		this.setSize(800, 600);
+		this.controlador = controlador;
+		controlador.addListener(this);
+
+		this.setSize(1000, 600);
+		this.setLocation(200, 100);
 		panelVisual = new JPanel(new CardLayout());
 		this.setContentPane(panelVisual);
 		cambiarPanel(crearPanelPrincipal());
-
-		/*this.controlador = controlador;
-		controlador.addListener(this);
-		
-		this.setSize(1000, 600);
-		this.setLocation(200, 100);
-		cambiarPanel(crearPanelLogin());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 
@@ -42,7 +39,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
 	private JPanel crearPanelLogin() {
 		JPanel panel;
-		PanelLogin panelLogin = new PanelLogin(controlador);
+		PanelLogin panelLogin = new PanelLogin();
 		panel = panelLogin.getPanel();
 		return panel;
 	}
@@ -76,6 +73,9 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		String propiedad = evt.getPropertyName();
 		switch (propiedad) {
 		case Controlador.PANEL_PRINCIPAL:
+			break;
+		case Controlador.PANEL_MENU:
+			cambiarPanel(crearPanelMenu());
 			break;
 		default:
 		}
