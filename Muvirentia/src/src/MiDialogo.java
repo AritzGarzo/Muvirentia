@@ -78,7 +78,7 @@ public class MiDialogo extends JDialog implements ActionListener {
 		// -------
 		JPanel pInvolucra = new JPanel();
 		pInvolucra.setBorder(
-				BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("¿Qué elementos involucra?"),
+				BorderFactory.createCompoundBorder(BorderFactory.createTitledBorder("ï¿½Quï¿½ elementos involucra?"),
 						BorderFactory.createLoweredBevelBorder()));
 		pInvolucra.setBackground(null);
 
