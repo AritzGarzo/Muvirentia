@@ -90,6 +90,11 @@ public class FormularioAniadir {
     public void setEspecie(Especie especie) {
         this.especie = especie;
     }
-
+//override to string
+    @Override
+    public String toString() {
+        return "Planta ID: "+planta.getId()+", con el nombre: "+planta.getId()+", pertenece a la especie: "+especie.getNombreEspecie()
+        +", esta plantado en el invernadero numero:"+invernadero.getInvernaderoID();
+    }
     
 }

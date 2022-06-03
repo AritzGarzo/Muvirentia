@@ -21,7 +21,7 @@ public class MiDialogo extends JDialog implements ActionListener {
 	JButton bSend, bCancel;
 	JLabel lbNombre, lbDescripcion;
 	JTextField tNombre, tDescripcion;
-	Formulario formulario;
+	FormularioIncidencia formulario;
 	JRadioButton rSi,rSensores,rValvula;
 
 	public MiDialogo(JFrame ventana, String titulo, boolean modo) {
@@ -115,7 +115,7 @@ public class MiDialogo extends JDialog implements ActionListener {
 		String comando = e.getActionCommand();
 		switch (comando) {
 		case "enviar":
-			formulario = new Formulario(tNombre.getText(),tDescripcion.getText(),rSi.isSelected(),
+			formulario = new FormularioIncidencia(tNombre.getText(),tDescripcion.getText(),rSi.isSelected(),
 					rSensores.isSelected(),rValvula.isSelected());
 			this.dispose();
 			break;
@@ -128,5 +128,5 @@ public class MiDialogo extends JDialog implements ActionListener {
 		}
 	}
 	
-	public Formulario getFormulario() {return formulario;}
+	public FormularioIncidencia getFormulario() {return formulario;}
 }

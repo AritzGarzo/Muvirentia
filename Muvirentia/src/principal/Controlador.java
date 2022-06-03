@@ -11,7 +11,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import pantallas.PanelMenu;
-import src.Formulario;
+import src.DialogoPlanta;
+import src.FormularioAniadir;
+import src.FormularioIncidencia;
 import src.MiDialogo;
 
 public class Controlador implements ActionListener,ListSelectionListener {
@@ -43,13 +45,16 @@ public class Controlador implements ActionListener,ListSelectionListener {
 		switch(comando) {
 		case FORMULARIO:
 			MiDialogo dialogo = new MiDialogo(new JFrame(),"Formulario",true);
-			Formulario formulario = dialogo.getFormulario();
+			FormularioIncidencia formulario = dialogo.getFormulario();
 			if(formulario!=null) conector.firePropertyChange(FORMULARIO, null, formulario);
 			break;
 		case PANEL_MENU:
 				conector.firePropertyChange(PANEL_MENU, null, 12);
 			break;
 		case ADD_PLANTA:
+			DialogoPlanta dialogoPlanta=new DialogoPlanta(new JFrame(),"Agregar Planta",true);
+			FormularioAniadir formularioAniadir=dialogoPlanta.getFormulario();
+			if (formularioAniadir!=null) conector.firePropertyChange(ADD_PLANTA, null, formularioAniadir);
 			break;
 		case DEL_PLANTA:
 			break;

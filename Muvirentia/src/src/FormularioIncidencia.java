@@ -1,11 +1,11 @@
 package src;
 
-public class Formulario {
+public class FormularioIncidencia {
 
 	String nombre, descripcion;
 	boolean intento, sensores, valvula;
 
-	public Formulario(String nombre, String descripcion, boolean intento, boolean sensores, boolean valvula) {
+	public FormularioIncidencia(String nombre, String descripcion, boolean intento, boolean sensores, boolean valvula) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.intento = intento;

@@ -18,15 +18,15 @@ import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
 import principal.Controlador;
-import src.Formulario;
+import src.FormularioIncidencia;
 
 public class PanelMenu extends JFrame implements PropertyChangeListener {
 //	private final static String FICHERO_FORMULARIOS = "formularios.dat";
 	Controlador controlador;
 	JPanel panel;
 	JButton bHome, bFormulario, bGrafico, bAddPlanta, bDelPlanta, bSistema;
-	JList<Formulario> jlFormularios;
-	List<Formulario> lFormularios;
+	JList<FormularioIncidencia> jlFormularios;
+	List<FormularioIncidencia> lFormularios;
 //	JList<Planta> jlPlantas;
 //	List<Planta> lPlantas;
 	boolean sistema=false;//true = sistema encendido | false = sistema apagado
@@ -109,7 +109,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		jlFormularios = new JList<>();
-		jlFormularios.setListData(lFormularios.toArray(new Formulario[0]));
+		jlFormularios.setListData(lFormularios.toArray(new FormularioIncidencia[0]));
 		jlFormularios.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		scroll.setViewportView(jlFormularios);
@@ -135,9 +135,9 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 					"Todavia no se puede enviar el formulario, pero se puede guardar", "Elemento por incrementar",
 					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 			if (opcion == JOptionPane.OK_OPTION) {
-				Formulario formulario = (Formulario) evt.getNewValue();
+				FormularioIncidencia formulario = (FormularioIncidencia) evt.getNewValue();
 				lFormularios.add(formulario);
-				jlFormularios.setListData(lFormularios.toArray(new Formulario[0]));
+				jlFormularios.setListData(lFormularios.toArray(new FormularioIncidencia[0]));
 			}
 			break;
 		case Controlador.ADD_PLANTA:
