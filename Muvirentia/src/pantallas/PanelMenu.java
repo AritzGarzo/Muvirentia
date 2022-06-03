@@ -140,10 +140,10 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 			}
 			break;
 		case Controlador.ADD_PLANTA:
-			
+			//insert en base de datos
 			break;
 		case Controlador.DEL_PLANTA:
-			
+			//delete en base de datos
 			break;
 		case Controlador.SISTEMA:
 			opcion = JOptionPane.showConfirmDialog(this, ((sistema)?"�Quieres apagar el sistema?":"�Quieres encender el sistema?"),

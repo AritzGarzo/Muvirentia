@@ -35,7 +35,7 @@ public class ConexionDB {
 
 	}
 
-	public void getUsuario() {
+/*/	public void getUsuario() {
 		
 		try {
 
@@ -54,15 +54,13 @@ public class ConexionDB {
 		}
 	
 		
-	}
+	}*/
 	
-	public void setDatos(String tabla, String nombrePlanta, String especie, String humedad) {
-		query = "insert into " + tabla + " (nombre,especie,condicion) values ('" + nombrePlanta + "' ,'" + especie
-				+ "' ,'" + humedad + "')";
-
+	public void setPlanta(Planta p) {
+		query = "insert into planta (PlantaID,nombre) values ('" + p.getId() + "' ,'" + p.getNombre() + "')";
 		try {
 			st.executeUpdate(query);
-			System.out.println("Usuario agregado");
+			System.out.println("Planta agregado");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
