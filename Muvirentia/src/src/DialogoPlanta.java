@@ -2,13 +2,11 @@ package src;
 
 import javax.swing.*;
 
-
 import javafx.scene.input.KeyEvent;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 public class DialogoPlanta extends JDialog implements ActionListener {
 
@@ -30,8 +28,6 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         super(ventana, titulo, modo);
         this.setSize(500, 1000);
         this.setLocation(600, 25);
-
-
 
         this.setContentPane(crearPanelDialog());
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -68,22 +64,23 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         tfAreaCultivable = new JTextField();
         tfNombrePropietario = new JTextField();
         tfPropietarioID = new JTextField();
-/*/
-        tfNombrePropietario.addKeyListener(new KeyA(){
-            
-            public void keyTyped(KeyEvent e) {
-                if (tfNombrePropietario.getText().length() >= 10) {
-                    e.consume();
-                }
-            }
-        });
-   */
+        /*
+         * /
+         * tfNombrePropietario.addKeyListener(new KeyA(){
+         * 
+         * public void keyTyped(KeyEvent e) {
+         * if (tfNombrePropietario.getText().length() >= 10) {
+         * e.consume();
+         * }
+         * }
+         * });
+         */
 
-        lbPlantaID = new JLabel("Planta ID: ");
+        lbPlantaID = new JLabel("Planta ID(*): ");
         lbNombre = new JLabel("Nombre de la planta: ");
         lbEspecieNombre = new JLabel("Nombre del especie : ");
-        lbEspecieID = new JLabel("Especie ID: ");
-        lbCondicionID = new JLabel("Condicion ID: ");
+        lbEspecieID = new JLabel("Especie ID(*): ");
+        lbCondicionID = new JLabel("Condicion ID(*): ");
         lbDescripcionCondicion = new JLabel("Descripcion para la condicion: ");
         lbTemporada = new JLabel("Temporada optima: ");
         lbHumedad = new JLabel("Humedad optima: ");
@@ -92,12 +89,11 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         lbLuz = new JLabel("Luz optima: ");
         lbFechaPlantado = new JLabel("Fecha plantado: ");
         lbPlantaCantidad = new JLabel("Cantidad plantado: ");
-        lbInvernaderoID = new JLabel("Invernadero ID: ");
+        lbInvernaderoID = new JLabel("Invernadero ID(*): ");
         lbDescripcionInvernadero = new JLabel("Descripcion del invernadero: ");
         lbAreaCultivable = new JLabel("Area Cultivable: ");
-        lbPropietarioID = new JLabel("Propietario ID: ");
+        lbPropietarioID = new JLabel("Propietario ID(*): ");
         lbNombrePropietario = new JLabel("Nombre del propietario: ");
-
 
         panel.add(lbPlantaID);
         panel.add(tfPlantaID);
@@ -136,7 +132,6 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         panel.add(lbNombrePropietario);
         panel.add(tfNombrePropietario);
 
-        
         return panel;
     }
 
@@ -158,18 +153,55 @@ public class DialogoPlanta extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-		switch (comando) {
-		case "Aceptar":
-			
-			this.dispose();
-			break;
-		case "Cancelar":
-			formulario=null;
-			this.dispose();
-			break;
-		default:
+        switch (comando) {
+            case "Aceptar":
+                if (tfPlantaID.getText().isEmpty() || tfInvernaderoID.getText().isEmpty()
+                        || tfPropietarioID.getText().isEmpty() ||
+                        tfEspecieID.getText().isEmpty() || tfCondicionID.getText().isEmpty()) {
+                    int opcion = JOptionPane.showConfirmDialog(null,
+                            "Debe completar todos los campos obligatorios, desea borrar datos introducidos?", "Error",
+                            JOptionPane.YES_NO_OPTION);
 
-		}
+                    if (opcion == 0) {
+                        borrarTextoIntroducidos();
+                    }
+
+                } else {
+                    this.dispose();
+                }
+                break;
+            case "Cancelar":
+                int opcion = JOptionPane.showConfirmDialog(null, "Hay cambios sin guardar, seguro que quiere cancelar?",
+                        "Error", JOptionPane.YES_NO_OPTION);
+                if (opcion == 0) {
+                    this.dispose();
+                    formulario = null;
+                }
+                break;
+            default:
+
+        }
+    }
+
+    private void borrarTextoIntroducidos() {
+        tfPlantaID.setText("");
+        tfNombre.setText("");
+        tfEspecieNombre.setText("");
+        tfEspecieID.setText("");
+        tfCondicionID.setText("");
+        tfDescripcionCondicion.setText("");
+        tfTemporada.setText("");
+        tfHumedad.setText("");
+        tfLitros.setText("");
+        tfTemperatura.setText("");
+        tfLuz.setText("");
+        tfFechaPlantado.setText("");
+        tfPlantaCantidad.setText("");
+        tfInvernaderoID.setText("");
+        tfDescripcionInvernadero.setText("");
+        tfAreaCultivable.setText("");
+        tfPropietarioID.setText("");
+        tfNombrePropietario.setText("");
     }
 
     public FormularioAniadir getFormulario() {
