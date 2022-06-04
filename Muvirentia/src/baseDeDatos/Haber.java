@@ -7,13 +7,13 @@ public class Haber {
     Date fechaPlantado;
     int cantidad;
     int plantaID;
-    int inventarioID;
+    int invernaderoID;
 
-    public Haber(Date fechaPlantado, int cantidad, int plantaID, int inventarioID) {
+    public Haber(Date fechaPlantado, int cantidad, int plantaID, int invernaderoID) {
         this.fechaPlantado = fechaPlantado;
         this.cantidad = cantidad;
         this.plantaID = plantaID;
-        this.inventarioID = inventarioID;
+        this.invernaderoID = invernaderoID;
     }
 
     public Date getFechaPlantado() {
@@ -29,8 +29,8 @@ public class Haber {
         return plantaID;
     }
 
-    public int getInventarioID() {
-        return inventarioID;
+    public int getInvernaderoID() {
+        return invernaderoID;
     }
 
     public void setFechaPlantado(Date fechaPlantado) {
@@ -45,8 +45,8 @@ public class Haber {
         this.plantaID = plantaID;
     }
 
-    public void setInventarioID(int inventarioID) {
-        this.inventarioID = inventarioID;
+    public void setInvernaderoID(int invernaderoID) {
+        this.invernaderoID = invernaderoID;
     }
 
     

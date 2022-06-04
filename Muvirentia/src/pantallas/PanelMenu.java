@@ -18,6 +18,7 @@ import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
 import principal.Controlador;
+import src.FormularioAniadir;
 import src.FormularioIncidencia;
 
 public class PanelMenu extends JFrame implements PropertyChangeListener {
@@ -27,8 +28,8 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	JButton bHome, bFormulario, bGrafico, bAddPlanta, bDelPlanta, bSistema;
 	JList<FormularioIncidencia> jlFormularios;
 	List<FormularioIncidencia> lFormularios;
-//	JList<Planta> jlPlantas;
-//	List<Planta> lPlantas;
+	JList<FormularioAniadir> jlPlantas;
+	List<FormularioAniadir> lPlantas;
 	boolean sistema=false;//true = sistema encendido | false = sistema apagado
 
 	public PanelMenu(Controlador controlador) {
@@ -142,6 +143,9 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 			break;
 		case Controlador.ADD_PLANTA:
 			//insert en base de datos
+			FormularioAniadir formularioAniadir=(FormularioAniadir)evt.getNewValue();
+			lPlantas.add(formularioAniadir);
+			//jlPlantas.setListData(lPlantas.toArray(new formularioAniadir[0]));
 			break;
 		case Controlador.DEL_PLANTA:
 			//delete en base de datos
