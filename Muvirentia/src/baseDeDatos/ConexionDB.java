@@ -266,7 +266,7 @@ public class ConexionDB {
 
 	public void setInvernadero(Invernadero i) {
 		query = "insert into invernadero (invernaderoID,descripcion,areaCultivo) values ('" + i.getInvernaderoID() + "' ,'"
-				+ i.getDescripcion() + "','" + i.getDescripcion() + "')";
+				+ i.getDescripcion() + "','" + i.getAreaCultivo() + "')";
 
 		try {
 			st.executeUpdate(query);
@@ -279,7 +279,7 @@ public class ConexionDB {
 
 	public void setPropietario(Propietario p, Invernadero i) {
 		query = "insert into propietario (propietarioID,nombre,invernaderoID) values ('" + p.getPropietarioID() + "' ,'"
-				+ p.getNombre() + "','" + i.getInvernaderoID() + "')";
+				+ p.getNombre() + "','" + p.getInventarioID() + "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Propietario agregado");
