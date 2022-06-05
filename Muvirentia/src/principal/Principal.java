@@ -33,6 +33,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		cambiarPanel(crearPanelPrincipal());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+		//ey
 	}
 //prueba
 	// ---------------------------paneles---------------------------
