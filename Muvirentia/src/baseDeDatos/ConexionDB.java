@@ -16,8 +16,8 @@ public class ConexionDB {
 	final static String PUERTO = "jdbc:mysql://localhost:3306/";
 	final static String NOMBRE_BASE_DE_DATOS = "Muvirentia";
 	final static String CONEXION_BASE_DE_DATOS = PUERTO + NOMBRE_BASE_DE_DATOS;
-	final static String USUARIO = "root";
-	final static String CONTRASENIA = "12345678aA@";
+	final static String USUARIO = "investor";
+	final static String CONTRASENIA = "investToHelp";
 
 	String query;
 

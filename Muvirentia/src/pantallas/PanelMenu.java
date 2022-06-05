@@ -37,6 +37,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	public PanelMenu(Controlador controlador) {
 		this.controlador = controlador;
 		lFormularios = new ArrayList<>();
+		lPlantas = new ArrayList<>();
 		controlador.addListener(this);
 		conexionDB=new ConexionDB();
 		// definir como se ve el panel
