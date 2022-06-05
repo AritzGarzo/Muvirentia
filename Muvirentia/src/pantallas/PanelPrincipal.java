@@ -1,7 +1,6 @@
 package pantallas;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -15,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import principal.Controlador;
+import src.Usuario;
 
 public class PanelPrincipal extends JFrame implements ActionListener {
 	Controlador controlador;
@@ -22,10 +22,11 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 	JButton bMenu,bUsuario,bValvula;
 	boolean valvula = false;
 	JLabel lbLuz,lbTemperatura,lbHumedad;
+	Usuario usuario;
 	
-	public PanelPrincipal(Controlador controlador) {
+	public PanelPrincipal(Controlador controlador,Usuario usuario) {
 		this.controlador = controlador;
-		
+		this.usuario = usuario;
 		
 		panel = new JPanel(new BorderLayout(0,20));
 		panel.add(crearPanelNorte(),BorderLayout.NORTH);
@@ -39,7 +40,7 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 		bMenu.setActionCommand(Controlador.PANEL_MENU);
 		bMenu.addActionListener(controlador);
 		
-		bUsuario = new JButton("Txillu");//colocar nombre del usuario
+		bUsuario = new JButton(usuario.getNombre());//colocar nombre del usuario
 		bUsuario.setActionCommand(Controlador.PANEL_LOGIN);
 		bUsuario.addActionListener(controlador);
 		

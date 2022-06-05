@@ -12,6 +12,7 @@ import baseDeDatos.ConexionDB;
 import pantallas.PanelLogin;
 import pantallas.PanelMenu;
 import pantallas.PanelPrincipal;
+import src.Usuario;
 
 public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
@@ -30,7 +31,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.setLocation(200, 100);
 		panelVisual = new JPanel(new CardLayout());
 		this.setContentPane(panelVisual);
-		cambiarPanel(crearPanelPrincipal());
+		cambiarPanel(crearPanelLogin());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		//ey
@@ -40,7 +41,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 
 	private JPanel crearPanelLogin() {
 		JPanel panel;
-		PanelLogin panelLogin = new PanelLogin();
+		PanelLogin panelLogin = new PanelLogin(controlador);
 		panel = panelLogin.getPanel();
 		return panel;
 	}
@@ -52,9 +53,9 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		return panel;
 	}
 	
-	private JPanel crearPanelPrincipal() {
+	private JPanel crearPanelPrincipal(Usuario usuario) {
 		JPanel panel;
-		PanelPrincipal panelPrincipal = new PanelPrincipal(controlador);
+		PanelPrincipal panelPrincipal = new PanelPrincipal(controlador,usuario);
 		panel = panelPrincipal.getPanel();
 		return panel;
 	}
@@ -74,9 +75,14 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		String propiedad = evt.getPropertyName();
 		switch (propiedad) {
 		case Controlador.PANEL_PRINCIPAL:
+			Usuario usuario = (Usuario)evt.getNewValue();
+			cambiarPanel(crearPanelPrincipal(usuario));
 			break;
 		case Controlador.PANEL_MENU:
 			cambiarPanel(crearPanelMenu());
+			break;
+		case Controlador.APAGAR:
+			Principal.this.dispose();
 			break;
 		default:
 		}

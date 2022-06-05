@@ -2,21 +2,21 @@ package principal;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import pantallas.PanelMenu;
 import src.DialogoPlanta;
 import src.FormularioAniadir;
 import src.FormularioIncidencia;
 import src.MiDialogo;
+import src.Usuario;
 
-public class Controlador implements ActionListener,ListSelectionListener {
+public class Controlador implements ActionListener,ListSelectionListener, PropertyChangeListener {
 	public final static String PANEL_PRINCIPAL="panel_principal",
 			PANEL_LOGIN="panel_login",
 			PANEL_GRAFICO="panel_grafico",
@@ -24,7 +24,10 @@ public class Controlador implements ActionListener,ListSelectionListener {
 			FORMULARIO="formulario",
 			ADD_PLANTA="add_planta",
 			DEL_PLANTA="del_planta",
-			SISTEMA="sistema";
+			SISTEMA="sistema",
+			CONFIRMAR="confirmar",
+			CANCELAR="cancelar",
+			APAGAR="apagar";
 	PropertyChangeSupport conector;
 	
 	public Controlador() {
@@ -70,5 +73,20 @@ public class Controlador implements ActionListener,ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		String propiedad = evt.getPropertyName();
+		switch(propiedad) {
+		case CONFIRMAR:
+			Usuario usuario = (Usuario) evt.getNewValue();
+			conector.firePropertyChange(PANEL_PRINCIPAL,null,usuario);
+			break;
+		case CANCELAR:
+			conector.firePropertyChange(APAGAR,false,true);
+			break;
+		default:
+		}
 	}
 }
