@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import baseDeDatos.*;
 
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +41,7 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         super(ventana, titulo, modo);
         this.setSize(500, 1000);
         this.setLocation(600, 25);
-        conexion=new ConexionDB();
+        conexion = new ConexionDB();
         this.setContentPane(crearPanelDialog());
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -179,30 +178,10 @@ public class DialogoPlanta extends JDialog implements ActionListener {
                     }
 
                 } else {
-                    planta = new Planta(Integer.parseInt(tfPlantaID.getText()), tfNombre.getText());
-                    condicion = new Condiciones(Integer.parseInt(tfCondicionID.getText()),
-                            tfDescripcionCondicion.getText(), Date.valueOf(tfTemporada.getText()),
-                            Integer.parseInt(tfHumedad.getText()), Float.parseFloat(tfLitros.getText()),
-                            Integer.parseInt(tfTemperatura.getText()), Integer.parseInt(tfLuz.getText()),
-                            Integer.parseInt(tfPlantaID.getText()));
-                    tiene = new Tiene(Integer.parseInt(tfPlantaID.getText()),
-                            Integer.parseInt(tfCondicionID.getText()));
-                    especie = new Especie(Integer.parseInt(tfEspecieID.getText()), tfEspecieNombre.getText(),
-                            Integer.parseInt(tfPlantaID.getText()));
-                    haber = new Haber(Date.valueOf(tfFechaPlantado.getText()),
-                            Integer.parseInt(tfPlantaCantidad.getText()), Integer.parseInt(tfPlantaID.getText()),
-                            Integer.parseInt(tfInvernaderoID.getText()));
-                    invernadero = new Invernadero(Integer.parseInt(tfInvernaderoID.getText()),
-                            tfDescripcionInvernadero.getText(), Integer.parseInt(tfAreaCultivable.getText()));
-                    propietario = new Propietario(Integer.parseInt(tfPropietarioID.getText()),
-                            tfNombrePropietario.getText(), Integer.parseInt(tfInvernaderoID.getText()));
-                    cuidar = new Cuidar(Integer.parseInt(tfPlantaID.getText()),
-                            Integer.parseInt(tfInvernaderoID.getText()), Integer.parseInt(tfPropietarioID.getText()));
 
-                    insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero, propietario, cuidar);
-
-                    formulario = new FormularioAniadir(planta, invernadero, tiene, cuidar, condicion, propietario,
-                            haber, especie);
+                    crearFormularioDeLosDatos();
+                    // insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero,
+                    // propietario, cuidar);
                     this.dispose();
                 }
                 break;
@@ -219,28 +198,59 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         }
     }
 
-private boolean campoVacio(){
-    if (tfPlantaID.getText().isEmpty() || tfInvernaderoID.getText().isEmpty()
-    || tfPropietarioID.getText().isEmpty() || tfFechaPlantado.getText().isEmpty() ||
-    tfEspecieID.getText().isEmpty() || tfCondicionID.getText().isEmpty() || tfTemporada.getText().isEmpty()|| tfHumedad.getText().isEmpty() ||
-    tfLitros.getText().isEmpty() || tfTemperatura.getText().isEmpty() || tfLuz.getText().isEmpty() || tfPlantaCantidad.getText().isEmpty() ||
-    tfDescripcionCondicion.getText().isEmpty() || tfDescripcionInvernadero.getText().isEmpty() || tfAreaCultivable.getText().isEmpty() ||
-    tfNombre.getText().isEmpty() || tfEspecieNombre.getText().isEmpty() || tfNombrePropietario.getText().isEmpty()) return true;
-    else return false; 
+    private void crearFormularioDeLosDatos() {
 
-}
+        planta = new Planta(Integer.parseInt(tfPlantaID.getText()), tfNombre.getText());
+        condicion = new Condiciones(Integer.parseInt(tfCondicionID.getText()),
+                tfDescripcionCondicion.getText(), Date.valueOf(tfTemporada.getText()),
+                Integer.parseInt(tfHumedad.getText()), Float.parseFloat(tfLitros.getText()),
+                Integer.parseInt(tfTemperatura.getText()), Integer.parseInt(tfLuz.getText()),
+                Integer.parseInt(tfPlantaID.getText()));
+        tiene = new Tiene(Integer.parseInt(tfPlantaID.getText()),
+                Integer.parseInt(tfCondicionID.getText()));
+        especie = new Especie(Integer.parseInt(tfEspecieID.getText()), tfEspecieNombre.getText(),
+                Integer.parseInt(tfPlantaID.getText()));
+        haber = new Haber(Date.valueOf(tfFechaPlantado.getText()),
+                Integer.parseInt(tfPlantaCantidad.getText()), Integer.parseInt(tfPlantaID.getText()),
+                Integer.parseInt(tfInvernaderoID.getText()));
+        invernadero = new Invernadero(Integer.parseInt(tfInvernaderoID.getText()),
+                tfDescripcionInvernadero.getText(), Integer.parseInt(tfAreaCultivable.getText()));
+        propietario = new Propietario(Integer.parseInt(tfPropietarioID.getText()),
+                tfNombrePropietario.getText(), Integer.parseInt(tfInvernaderoID.getText()));
+        cuidar = new Cuidar(Integer.parseInt(tfPlantaID.getText()),
+                Integer.parseInt(tfInvernaderoID.getText()), Integer.parseInt(tfPropietarioID.getText()));
+        formulario = new FormularioAniadir(planta, invernadero, tiene, cuidar, condicion, propietario,
+                haber, especie);
+    }
+
+    private boolean campoVacio() {
+        if (tfPlantaID.getText().isEmpty() || tfInvernaderoID.getText().isEmpty()
+                || tfPropietarioID.getText().isEmpty() || tfFechaPlantado.getText().isEmpty() ||
+                tfEspecieID.getText().isEmpty() || tfCondicionID.getText().isEmpty() || tfTemporada.getText().isEmpty()
+                || tfHumedad.getText().isEmpty() ||
+                tfLitros.getText().isEmpty() || tfTemperatura.getText().isEmpty() || tfLuz.getText().isEmpty()
+                || tfPlantaCantidad.getText().isEmpty() ||
+                tfDescripcionCondicion.getText().isEmpty() || tfDescripcionInvernadero.getText().isEmpty()
+                || tfAreaCultivable.getText().isEmpty() ||
+                tfNombre.getText().isEmpty() || tfEspecieNombre.getText().isEmpty()
+                || tfNombrePropietario.getText().isEmpty())
+            return true;
+        else
+            return false;
+
+    }
 
     private void insertBaseDeDatos(Planta planta2, Condiciones condicion2, Tiene tiene2, Especie especie2, Haber haber2,
             Invernadero invernadero2, Propietario propietario2, Cuidar cuidar2) {
 
-                    conexion.setPlanta(planta2);
-                    conexion.setInvernadero(invernadero2);
-                    conexion.setPropietario(propietario2, invernadero2);
-                    conexion.setCondicion(condicion2, planta2);
-                    conexion.setTiene(tiene2);
-                    conexion.setEspecie(especie2, planta2);
-                    conexion.setHaber(haber2);
-                    conexion.setCuidar(cuidar2);
+        conexion.setPlanta(planta2);
+        conexion.setInvernadero(invernadero2);
+        conexion.setPropietario(propietario2, invernadero2);
+        conexion.setCondicion(condicion2, planta2);
+        conexion.setTiene(tiene2);
+        conexion.setEspecie(especie2, planta2);
+        conexion.setHaber(haber2);
+        conexion.setCuidar(cuidar2);
     }
 
     private void borrarTextoIntroducidos() {

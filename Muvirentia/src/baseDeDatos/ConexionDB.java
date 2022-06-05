@@ -322,4 +322,15 @@ public class ConexionDB {
 		}
 
 	}
+
+    public void eliminarPlanta(String plantaID) {
+		query = "delete from planta where plantaID = '" + plantaID + "'";
+		try {
+			st.executeUpdate(query);
+			System.out.println("Planta eliminado");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+		
 }

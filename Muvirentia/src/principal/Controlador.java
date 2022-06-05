@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import baseDeDatos.ConexionDB;
 import pantallas.PanelMenu;
 import src.DialogoPlanta;
 import src.FormularioAniadir;
@@ -26,6 +27,7 @@ public class Controlador implements ActionListener,ListSelectionListener {
 			DEL_PLANTA="del_planta",
 			SISTEMA="sistema";
 	PropertyChangeSupport conector;
+
 	
 	public Controlador() {
 		conector = new PropertyChangeSupport(this);
@@ -57,6 +59,8 @@ public class Controlador implements ActionListener,ListSelectionListener {
 			if (formularioAniadir!=null) conector.firePropertyChange(ADD_PLANTA, null, formularioAniadir);
 			break;
 		case DEL_PLANTA:
+		conector.firePropertyChange(DEL_PLANTA, null, null);
+
 			break;
 		case SISTEMA:
 			conector.firePropertyChange(SISTEMA, null, 12);
