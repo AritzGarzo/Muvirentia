@@ -21,11 +21,12 @@ public class DialogoPlanta extends JDialog implements ActionListener {
             lbAreaCultivable,
             lbNombrePropietario, lbPropietarioID;
     JTextField tfPlantaID, tfNombre, tfEspecieNombre, tfEspecieID, tfCondicionID, tfDescripcionCondicion, tfTemporada,
-            tfHumedad,
-            tfLitros, tfTemperatura, tfLuz, tfFechaPlantado, tfPlantaCantidad, tfInvernaderoID,
-            tfDescripcionInvernadero, tfAreaCultivable,
-            tfNombrePropietario, tfPropietarioID;
+            tfHumedad, tfLitros, tfTemperatura, tfLuz, tfFechaPlantado, tfPlantaCantidad, tfInvernaderoID,
+            tfDescripcionInvernadero, tfAreaCultivable, tfNombrePropietario, tfPropietarioID;
+
     FormularioAniadir formulario;
+
+    ConexionDB conexion;
 
     Planta planta;
     Condiciones condicion;
@@ -41,7 +42,7 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         super(ventana, titulo, modo);
         this.setSize(500, 1000);
         this.setLocation(600, 25);
-
+        conexion=new ConexionDB();
         this.setContentPane(crearPanelDialog());
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -89,23 +90,23 @@ public class DialogoPlanta extends JDialog implements ActionListener {
          * });
          */
 
-        lbPlantaID = new JLabel("Planta ID(*): ");
+        lbPlantaID = new JLabel("Planta ID: ");
         lbNombre = new JLabel("Nombre de la planta: ");
         lbEspecieNombre = new JLabel("Nombre del especie : ");
-        lbEspecieID = new JLabel("Especie ID(*): ");
-        lbCondicionID = new JLabel("Condicion ID(*): ");
+        lbEspecieID = new JLabel("Especie ID: ");
+        lbCondicionID = new JLabel("Condicion ID: ");
         lbDescripcionCondicion = new JLabel("Descripcion para la condicion: ");
-        lbTemporada = new JLabel("Temporada optima: ");
+        lbTemporada = new JLabel("Temporada optima (yyyy-mm-dd): ");
         lbHumedad = new JLabel("Humedad optima: ");
         lbLitros = new JLabel("Litros de agua optima: ");
         lbTemperatura = new JLabel("Temperatura optima: ");
         lbLuz = new JLabel("Luz optima: ");
-        lbFechaPlantado = new JLabel("Fecha plantado(*): ");
+        lbFechaPlantado = new JLabel("Fecha plantado (yyyy-mm-dd): ");
         lbPlantaCantidad = new JLabel("Cantidad plantado: ");
-        lbInvernaderoID = new JLabel("Invernadero ID(*): ");
+        lbInvernaderoID = new JLabel("Invernadero ID: ");
         lbDescripcionInvernadero = new JLabel("Descripcion del invernadero: ");
         lbAreaCultivable = new JLabel("Area Cultivable: ");
-        lbPropietarioID = new JLabel("Propietario ID(*): ");
+        lbPropietarioID = new JLabel("Propietario ID: ");
         lbNombrePropietario = new JLabel("Nombre del propietario: ");
 
         panel.add(lbPlantaID);
@@ -168,11 +169,9 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         String comando = e.getActionCommand();
         switch (comando) {
             case "Aceptar":
-                if (tfPlantaID.getText().isEmpty() || tfInvernaderoID.getText().isEmpty()
-                        || tfPropietarioID.getText().isEmpty() || tfFechaPlantado.getText().isEmpty() ||
-                        tfEspecieID.getText().isEmpty() || tfCondicionID.getText().isEmpty()) {
+                if (campoVacio()) {
                     int opcion = JOptionPane.showConfirmDialog(null,
-                            "Debe completar todos los campos obligatorios, desea borrar datos introducidos?", "Error",
+                            "Debe completar todos los campos, desea borrar datos introducidos?", "Error",
                             JOptionPane.YES_NO_OPTION);
 
                     if (opcion == 0) {
@@ -180,7 +179,6 @@ public class DialogoPlanta extends JDialog implements ActionListener {
                     }
 
                 } else {
-                    // SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                     planta = new Planta(Integer.parseInt(tfPlantaID.getText()), tfNombre.getText());
                     condicion = new Condiciones(Integer.parseInt(tfCondicionID.getText()),
                             tfDescripcionCondicion.getText(), Date.valueOf(tfTemporada.getText()),
@@ -200,6 +198,9 @@ public class DialogoPlanta extends JDialog implements ActionListener {
                             tfNombrePropietario.getText(), Integer.parseInt(tfInvernaderoID.getText()));
                     cuidar = new Cuidar(Integer.parseInt(tfPlantaID.getText()),
                             Integer.parseInt(tfInvernaderoID.getText()), Integer.parseInt(tfPropietarioID.getText()));
+
+                    insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero, propietario, cuidar);
+
                     formulario = new FormularioAniadir(planta, invernadero, tiene, cuidar, condicion, propietario,
                             haber, especie);
                     this.dispose();
@@ -216,6 +217,30 @@ public class DialogoPlanta extends JDialog implements ActionListener {
             default:
 
         }
+    }
+
+private boolean campoVacio(){
+    if (tfPlantaID.getText().isEmpty() || tfInvernaderoID.getText().isEmpty()
+    || tfPropietarioID.getText().isEmpty() || tfFechaPlantado.getText().isEmpty() ||
+    tfEspecieID.getText().isEmpty() || tfCondicionID.getText().isEmpty() || tfTemporada.getText().isEmpty()|| tfHumedad.getText().isEmpty() ||
+    tfLitros.getText().isEmpty() || tfTemperatura.getText().isEmpty() || tfLuz.getText().isEmpty() || tfPlantaCantidad.getText().isEmpty() ||
+    tfDescripcionCondicion.getText().isEmpty() || tfDescripcionInvernadero.getText().isEmpty() || tfAreaCultivable.getText().isEmpty() ||
+    tfNombre.getText().isEmpty() || tfEspecieNombre.getText().isEmpty() || tfNombrePropietario.getText().isEmpty()) return true;
+    else return false; 
+
+}
+
+    private void insertBaseDeDatos(Planta planta2, Condiciones condicion2, Tiene tiene2, Especie especie2, Haber haber2,
+            Invernadero invernadero2, Propietario propietario2, Cuidar cuidar2) {
+
+                    conexion.setPlanta(planta2);
+                    conexion.setInvernadero(invernadero2);
+                    conexion.setPropietario(propietario2, invernadero2);
+                    conexion.setCondicion(condicion2, planta2);
+                    conexion.setTiene(tiene2);
+                    conexion.setEspecie(especie2, planta2);
+                    conexion.setHaber(haber2);
+                    conexion.setCuidar(cuidar2);
     }
 
     private void borrarTextoIntroducidos() {
