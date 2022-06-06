@@ -7,11 +7,11 @@ import baseDeDatos.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
-public class DialogoPlanta extends JDialog implements ActionListener {
+public class DialogoPlanta extends JDialog implements ActionListener, KeyListener {
 
     JButton bAceptar, bCancelar;
     JLabel lbPlantaID, lbNombre, lbEspecieNombre, lbEspecieID, lbCondicionID, lbDescripcionCondicion, lbTemporada,
@@ -78,7 +78,7 @@ public class DialogoPlanta extends JDialog implements ActionListener {
         tfNombrePropietario = new JTextField();
         tfPropietarioID = new JTextField();
         /*
-         * /
+         * 
          * tfNombrePropietario.addKeyListener(new KeyA(){
          * 
          * public void keyTyped(KeyEvent e) {
@@ -88,6 +88,8 @@ public class DialogoPlanta extends JDialog implements ActionListener {
          * }
          * });
          */
+
+         tfNombrePropietario.addKeyListener(this);
 
         lbPlantaID = new JLabel("Planta ID: ");
         lbNombre = new JLabel("Nombre de la planta: ");
@@ -276,6 +278,24 @@ public class DialogoPlanta extends JDialog implements ActionListener {
 
     public FormularioAniadir getFormulario() {
         return formulario;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+        
     }
 
 }
