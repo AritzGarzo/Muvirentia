@@ -38,7 +38,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	boolean sistema = true;// true = sistema encendido | false = sistema apagado
 	ConexionDB conexionDB;
 	Backup backup;
-	boolean encendido = false;
+
 
 	public PanelMenu(Controlador controlador) {
 		this.controlador = controlador;
@@ -156,7 +156,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 				// jlPlantas.setListData(lPlantas.toArray(new formularioAniadir[0]));
 				break;
 			case Controlador.DEL_PLANTA:
-				// delete en base de datos
+				
 				String resultado = JOptionPane.showInputDialog("ID de la planta que desea eliminar: ");
 				conexionDB.eliminarPlanta(resultado);
 				break;
@@ -165,19 +165,20 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 						((sistema) ? "¿Quieres apagar el sistema?" : "¿Quieres encender el sistema?"),
 						"Estado del sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
-				if (sistema) {// sistema encendido
+				if (sistema) {// sistema encendido para apagar
 					if (opcion == JOptionPane.YES_OPTION) {
 						sistema = false;
-					}
-				} else {// sistema apagado
-					if (opcion == JOptionPane.YES_OPTION) {
-						sistema = true;
-							try {
+						try {
 							backup.backupSql();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+					}
+				} else {// sistema apagado para encender
+					if (opcion == JOptionPane.YES_OPTION) {
+						sistema = true;
+							
 					}
 				}
 				break;
