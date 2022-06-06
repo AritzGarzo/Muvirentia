@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
+import baseDeDatos.Backup;
 import baseDeDatos.ConexionDB;
+
 import principal.Controlador;
 import src.FormularioAniadir;
 import src.FormularioIncidencia;
@@ -33,6 +37,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	List<FormularioAniadir> lPlantas;
 	boolean sistema=false;//true = sistema encendido | false = sistema apagado
 	ConexionDB conexionDB;
+	Backup backup;
 
 	public PanelMenu(Controlador controlador) {
 		this.controlador = controlador;
@@ -40,6 +45,8 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		lPlantas = new ArrayList<>();
 		controlador.addListener(this);
 		conexionDB=new ConexionDB();
+		backup=new Backup();
+
 		// definir como se ve el panel
 		panel = new JPanel(new BorderLayout(0, 10));
 		panel.add(crearPanelNorte(), BorderLayout.NORTH);
@@ -157,7 +164,13 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		case Controlador.SISTEMA:
 			opcion = JOptionPane.showConfirmDialog(this, ((sistema)?"¿Quieres apagar el sistema?":"¿Quieres encender el sistema?"),
 					"Estado del sistema",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
-			if(sistema) {//sistema encendido
+				try {
+					backup.backupSql();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					if(sistema) {//sistema encendido
 				if(opcion == JOptionPane.YES_OPTION) {
 					sistema = false;
 				}
