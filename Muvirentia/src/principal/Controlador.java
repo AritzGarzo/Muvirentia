@@ -10,11 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-<<<<<<< HEAD
-=======
 import baseDeDatos.ConexionDB;
 import pantallas.PanelMenu;
->>>>>>> Txillu
 import src.DialogoPlanta;
 import src.FormularioAniadir;
 import src.FormularioIncidencia;
