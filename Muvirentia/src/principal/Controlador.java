@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+<<<<<<< HEAD
+=======
+import baseDeDatos.ConexionDB;
+import pantallas.PanelMenu;
+>>>>>>> Txillu
 import src.DialogoPlanta;
 import src.FormularioAniadir;
 import src.FormularioIncidencia;
@@ -29,6 +34,7 @@ public class Controlador implements ActionListener,ListSelectionListener, Proper
 			CANCELAR="cancelar",
 			APAGAR="apagar";
 	PropertyChangeSupport conector;
+
 	
 	public Controlador() {
 		conector = new PropertyChangeSupport(this);
@@ -60,6 +66,8 @@ public class Controlador implements ActionListener,ListSelectionListener, Proper
 			if (formularioAniadir!=null) conector.firePropertyChange(ADD_PLANTA, null, formularioAniadir);
 			break;
 		case DEL_PLANTA:
+		conector.firePropertyChange(DEL_PLANTA, null, null);
+
 			break;
 		case SISTEMA:
 			conector.firePropertyChange(SISTEMA, null, 12);

@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
 
+import baseDeDatos.ConexionDB;
 import principal.Controlador;
 import src.FormularioAniadir;
 import src.FormularioIncidencia;
@@ -31,12 +32,14 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	JList<FormularioAniadir> jlPlantas;
 	List<FormularioAniadir> lPlantas;
 	boolean sistema=false;//true = sistema encendido | false = sistema apagado
+	ConexionDB conexionDB;
 
 	public PanelMenu(Controlador controlador) {
 		this.controlador = controlador;
 		lFormularios = new ArrayList<>();
+		lPlantas = new ArrayList<>();
 		controlador.addListener(this);
-
+		conexionDB=new ConexionDB();
 		// definir como se ve el panel
 		panel = new JPanel(new BorderLayout(0, 10));
 		panel.add(crearPanelNorte(), BorderLayout.NORTH);
@@ -142,13 +145,14 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 			}
 			break;
 		case Controlador.ADD_PLANTA:
-			//insert en base de datos
 			FormularioAniadir formularioAniadir=(FormularioAniadir)evt.getNewValue();
 			lPlantas.add(formularioAniadir);
 			//jlPlantas.setListData(lPlantas.toArray(new formularioAniadir[0]));
 			break;
 		case Controlador.DEL_PLANTA:
 			//delete en base de datos
+			String resultado=JOptionPane.showInputDialog("ID de la planta que desea eliminar: ");
+			conexionDB.eliminarPlanta(resultado);
 			break;
 		case Controlador.SISTEMA:
 			opcion = JOptionPane.showConfirmDialog(this, ((sistema)?"¿Quieres apagar el sistema?":"¿Quieres encender el sistema?"),

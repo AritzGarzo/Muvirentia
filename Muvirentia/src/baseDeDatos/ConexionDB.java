@@ -16,8 +16,8 @@ public class ConexionDB {
 	final static String PUERTO = "jdbc:mysql://localhost:3306/";
 	final static String NOMBRE_BASE_DE_DATOS = "Muvirentia";
 	final static String CONEXION_BASE_DE_DATOS = PUERTO + NOMBRE_BASE_DE_DATOS;
-	final static String USUARIO = "root";
-	final static String CONTRASENIA = "12345678aA@";
+	final static String USUARIO = "investor";
+	final static String CONTRASENIA = "investToHelp";
 
 	String query;
 
@@ -266,7 +266,7 @@ public class ConexionDB {
 
 	public void setInvernadero(Invernadero i) {
 		query = "insert into invernadero (invernaderoID,descripcion,areaCultivo) values ('" + i.getInvernaderoID() + "' ,'"
-				+ i.getDescripcion() + "','" + i.getDescripcion() + "')";
+				+ i.getDescripcion() + "','" + i.getAreaCultivo() + "')";
 
 		try {
 			st.executeUpdate(query);
@@ -279,7 +279,7 @@ public class ConexionDB {
 
 	public void setPropietario(Propietario p, Invernadero i) {
 		query = "insert into propietario (propietarioID,nombre,invernaderoID) values ('" + p.getPropietarioID() + "' ,'"
-				+ p.getNombre() + "','" + i.getInvernaderoID() + "')";
+				+ p.getNombre() + "','" + p.getInventarioID() + "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Propietario agregado");
@@ -322,4 +322,15 @@ public class ConexionDB {
 		}
 
 	}
+
+    public void eliminarPlanta(String plantaID) {
+		query = "delete from planta where plantaID = '" + plantaID + "'";
+		try {
+			st.executeUpdate(query);
+			System.out.println("Planta eliminado");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+		
 }
