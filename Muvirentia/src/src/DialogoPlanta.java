@@ -39,7 +39,7 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
     // Constructor
     public DialogoPlanta(JFrame ventana, String titulo, boolean modo) {
         super(ventana, titulo, modo);
-        this.setSize(500, 1000);
+        this.setSize(500, 750);
         this.setLocation(600, 25);
         conexion = new ConexionDB();
         this.setContentPane(crearPanelDialog());
