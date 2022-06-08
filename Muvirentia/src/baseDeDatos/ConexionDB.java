@@ -6,12 +6,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 public class ConexionDB {
 
 	private Connection conexion;
 	private Statement st;
 	private ResultSet resultado;
+	Random ramndom = new Random();
 
 	final static String PUERTO = "jdbc:mysql://localhost:3306/";
 	final static String NOMBRE_BASE_DE_DATOS = "Muvirentia";
@@ -231,7 +233,8 @@ public class ConexionDB {
 	}
 
 	public void setTiene(Tiene t) {
-		query = "insert into tiene (plantaID,condicionID) values ('" + t.getPlantaID() + "' ,'" + t.getCondicionID() + "')";
+		query = "insert into tiene (plantaID,condicionID) values ('" + t.getPlantaID() + "' ,'" + t.getCondicionID()
+				+ "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Tiene agregado");
@@ -253,8 +256,10 @@ public class ConexionDB {
 
 	}
 
-	public void setEspecie(Especie e, Planta p) {
-		query = "insert into especie (especieID,nombreEspecie,plantaID) values ('" + e.especieID + "','" + e.getNombreEspecie()
+
+	public void setEspecieNoCreado(Especie e, Planta p) {
+		query = "insert into especie (especieID,nombreEspecie,plantaID) values ('" + e.especieID + "','"
+				+ e.getNombreEspecie()
 				+ "' ,'" + p.getId() + "')";
 		try {
 			st.executeUpdate(query);
@@ -264,9 +269,24 @@ public class ConexionDB {
 		}
 	}
 
-	public void setInvernadero(Invernadero i) {
-		query = "insert into invernadero (invernaderoID,descripcion,areaCultivo,propietarioID) values ('" + i.getInvernaderoID() + "' ,'"
-				+ i.getDescripcion() + "','" + i.getAreaCultivo() +"','" +i.propietarioID +"')";
+	public boolean invernaderoCreado(Invernadero i){
+		query = "select * from invernadero where invernaderoID = '" + i.getInvernaderoID() + "'";
+		try {
+			resultado = st.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	// para hacer insert en la tabla invernadero si la id NO está repetido
+	public void setInvernaderoNoCreado(Invernadero i) {
+		query = "insert into invernadero (invernaderoID,descripcion,areaCultivo,propietarioID) values ('"
+				+ i.getInvernaderoID() + "' ,'"
+				+ i.getDescripcion() + "','" + i.getAreaCultivo() + "','" + i.propietarioID + "')";
 
 		try {
 			st.executeUpdate(query);
@@ -277,9 +297,37 @@ public class ConexionDB {
 
 	}
 
-	public void setPropietario(Propietario p, Invernadero i) {
-		query = "insert into propietario (propietarioID,nombre) values ('" + p.getPropietarioID() + "' ,'"
-				+ p.getNombre() + "')";
+	// para hacer insert en la tabla invernadero si la id está repetido
+	public void setInvernaderoCreado(Invernadero i) {
+		query = "insert into invernadero (descripcion,areaCultivo,propietarioID) values ('" + i.getDescripcion() + "','"
+				+ i.getAreaCultivo() + "','" + i.propietarioID + "')";
+
+		try {
+			st.executeUpdate(query);
+			System.out.println("Invernadero agregado");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	public boolean propietarioCreado(Propietario p){
+		query = "select * from propietario where propietarioID = '" + p.getPropietarioID() + "'";
+		try {
+			resultado = st.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public void setPropietarioNoCreado(Propietario p, Invernadero i) {
+		String pass = String.valueOf(ramndom.nextInt(1000000));
+		query = "insert into propietario (propietarioID,nombre,contrasenia) values ('" + p.getPropietarioID() + "' ,'"
+				+ p.getNombre() + "' ,'" + pass + "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Propietario agregado");
@@ -289,6 +337,17 @@ public class ConexionDB {
 
 	}
 
+	public void setPropietarioCreado(Propietario p, Invernadero i) {
+		String pass = String.valueOf(ramndom.nextInt(1000000));
+		query = "insert into propietario (nombre,contrasenia) values ('" + p.getNombre() + "' ,'" + pass + "')";
+		try {
+			st.executeUpdate(query);
+			System.out.println("Propietario agregado");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
 
 	public void setCuidar(Cuidar c) {
 		query = "insert into cuidar (propietarioID,plantaID,invernaderoID) values ('" + c.getPropietarioID() + "' ,'"
@@ -312,7 +371,7 @@ public class ConexionDB {
 
 	}
 
-    public void eliminarPlanta(String plantaID) {
+	public void eliminarPlanta(String plantaID) {
 		query = "delete from planta where plantaID = '" + plantaID + "'";
 		try {
 			st.executeUpdate(query);
@@ -321,5 +380,5 @@ public class ConexionDB {
 			ex.printStackTrace();
 		}
 	}
-		
+
 }

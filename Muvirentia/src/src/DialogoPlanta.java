@@ -89,7 +89,7 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
          * });
          */
 
-         tfNombrePropietario.addKeyListener(this);
+        tfNombrePropietario.addKeyListener(this);
 
         lbPlantaID = new JLabel("Planta ID: ");
         lbNombre = new JLabel("Nombre de la planta: ");
@@ -181,9 +181,9 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
 
                 } else {
 
-                     crearFormularioDeLosDatos();
-                     insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero,
-                     propietario, cuidar);
+                    crearFormularioDeLosDatos();
+                    insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero,
+                            propietario, cuidar);
                     this.dispose();
                 }
                 break;
@@ -216,7 +216,8 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
                 Integer.parseInt(tfPlantaCantidad.getText()), Integer.parseInt(tfPlantaID.getText()),
                 Integer.parseInt(tfInvernaderoID.getText()));
         invernadero = new Invernadero(Integer.parseInt(tfInvernaderoID.getText()),
-                tfDescripcionInvernadero.getText(), Integer.parseInt(tfAreaCultivable.getText()),Integer.parseInt(tfPropietarioID.getText()));
+                tfDescripcionInvernadero.getText(), Integer.parseInt(tfAreaCultivable.getText()),
+                Integer.parseInt(tfPropietarioID.getText()));
         propietario = new Propietario(Integer.parseInt(tfPropietarioID.getText()),
                 tfNombrePropietario.getText(), Integer.parseInt(tfInvernaderoID.getText()));
         cuidar = new Cuidar(Integer.parseInt(tfPlantaID.getText()),
@@ -246,11 +247,21 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
             Invernadero invernadero2, Propietario propietario2, Cuidar cuidar2) {
 
         conexion.setPlanta(planta2);
-        conexion.setPropietario(propietario2, invernadero2);
-        conexion.setInvernadero(invernadero2);
+
+        if (conexion.propietarioCreado(propietario2)) {
+            conexion.setPropietarioCreado(propietario2, invernadero2);
+        } else {
+            conexion.setPropietarioNoCreado(propietario2, invernadero2);
+        }
+        if (conexion.invernaderoCreado(invernadero2)) {
+            conexion.setInvernaderoCreado(invernadero2);
+        } else {
+            conexion.setInvernaderoNoCreado(invernadero2);
+        }
+        
         conexion.setCondicion(condicion2, planta2);
         conexion.setTiene(tiene2);
-        conexion.setEspecie(especie2, planta2);
+        conexion.setEspecieNoCreado(especie2, planta2);
         conexion.setHaber(haber2);
         conexion.setCuidar(cuidar2);
     }
@@ -283,19 +294,19 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
