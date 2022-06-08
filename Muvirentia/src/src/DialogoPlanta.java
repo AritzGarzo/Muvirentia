@@ -202,7 +202,8 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
 
     private void crearFormularioDeLosDatos() {
 
-        planta = new Planta(Integer.parseInt(tfPlantaID.getText()), tfNombre.getText());
+        planta = new Planta(Integer.parseInt(tfPlantaID.getText()), tfNombre.getText(),
+                Integer.parseInt(tfEspecieID.getText()));
         condicion = new Condiciones(Integer.parseInt(tfCondicionID.getText()),
                 tfDescripcionCondicion.getText(), Date.valueOf(tfTemporada.getText()),
                 Integer.parseInt(tfHumedad.getText()), Float.parseFloat(tfLitros.getText()),
@@ -220,8 +221,8 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
                 Integer.parseInt(tfPropietarioID.getText()));
         propietario = new Propietario(Integer.parseInt(tfPropietarioID.getText()),
                 tfNombrePropietario.getText(), Integer.parseInt(tfInvernaderoID.getText()));
-        cuidar = new Cuidar(Integer.parseInt(tfPlantaID.getText()),
-                Integer.parseInt(tfInvernaderoID.getText()), Integer.parseInt(tfPropietarioID.getText()));
+        cuidar = new Cuidar(Integer.parseInt(tfInvernaderoID.getText()),
+                Integer.parseInt(tfPlantaID.getText()), Integer.parseInt(tfPropietarioID.getText()));
         formulario = new FormularioAniadir(planta, invernadero, tiene, cuidar, condicion, propietario,
                 haber, especie);
     }
@@ -246,22 +247,23 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
     private void insertBaseDeDatos(Planta planta2, Condiciones condicion2, Tiene tiene2, Especie especie2, Haber haber2,
             Invernadero invernadero2, Propietario propietario2, Cuidar cuidar2) {
 
-        conexion.setPlanta(planta2);
+        if (!(conexion.especieCreado(especie2))) {
+            conexion.setEspecieNoCreado(especie2, planta2);
+        }
+        if (!(conexion.plantaCreado(planta2))) {
+            conexion.setPlanta(planta2);
+        }
 
-        if (conexion.propietarioCreado(propietario2)) {
-            conexion.setPropietarioCreado(propietario2, invernadero2);
-        } else {
+        if (!(conexion.propietarioCreado(propietario2))) {
             conexion.setPropietarioNoCreado(propietario2, invernadero2);
         }
-        if (conexion.invernaderoCreado(invernadero2)) {
-            conexion.setInvernaderoCreado(invernadero2);
-        } else {
+        if (!(conexion.invernaderoCreado(invernadero2))) {
             conexion.setInvernaderoNoCreado(invernadero2);
         }
-        
-        conexion.setCondicion(condicion2, planta2);
+        if (!(conexion.condicionCreado(condicion2))) {
+            conexion.setCondicion(condicion2, planta2);
+        }
         conexion.setTiene(tiene2);
-        conexion.setEspecieNoCreado(especie2, planta2);
         conexion.setHaber(haber2);
         conexion.setCuidar(cuidar2);
     }

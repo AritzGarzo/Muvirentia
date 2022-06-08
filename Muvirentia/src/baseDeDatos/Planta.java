@@ -3,17 +3,28 @@ package baseDeDatos;
 public class Planta {
     int plantaID;
     String nombre;
+    int especieID;
 
-    public Planta(int id, String nombre) {
+    public Planta(int id, String nombre, int especieID) {
         this.plantaID = id;
         this.nombre = nombre;
+        this.especieID = especieID;
     }
 
     public int getId() {
         return plantaID;
     }
+
     public String getNombre() {
-         return nombre;
+        return nombre;
+    }
+
+    public int getEspecie() {
+        return especieID;
+    }
+
+    public void setEspecie(int especieID) {
+        this.especieID = especieID;
     }
 
     public void setId(int id) {
@@ -24,4 +35,3 @@ public class Planta {
         this.nombre = nombre;
     }
 }
-

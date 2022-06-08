@@ -206,9 +206,11 @@ public class ConexionDB {
 		}
 
 	}
+	
+	
 
 	public void setPlanta(Planta p) {
-		query = "insert into planta (PlantaID,nombre) values ('" + p.getId() + "' ,'" + p.getNombre() + "')";
+		query = "insert into planta (PlantaID,nombre,especieID) values ('" + p.getId() + "' ,'" + p.getNombre()+ "' ,'" + p.getEspecie()  + "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Planta agregado");
@@ -216,6 +218,19 @@ public class ConexionDB {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public boolean plantaCreado(Planta p){
+		query = "select * from planta where plantaID = '" + p.getId() + "'";
+		try {
+			resultado = st.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public void setCondicion(Condiciones c, Planta p) {
@@ -232,6 +247,19 @@ public class ConexionDB {
 
 	}
 
+	public boolean condicionCreado(Condiciones c){
+		query = "select * from condiciones where condicionID = '" + c.getCondicionID() + "'";
+		try {
+			resultado = st.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	public void setTiene(Tiene t) {
 		query = "insert into tiene (plantaID,condicionID) values ('" + t.getPlantaID() + "' ,'" + t.getCondicionID()
 				+ "')";
@@ -256,11 +284,23 @@ public class ConexionDB {
 
 	}
 
+	
+	public boolean especieCreado(Especie es){
+		query = "select * from especie where especieID = '" + es.getEspecieID() + "'";
+		try {
+			resultado = st.executeQuery(query);
+			if (resultado.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public void setEspecieNoCreado(Especie e, Planta p) {
-		query = "insert into especie (especieID,nombreEspecie,plantaID) values ('" + e.especieID + "','"
-				+ e.getNombreEspecie()
-				+ "' ,'" + p.getId() + "')";
+		query = "insert into especie (especieID,nombreEspecie) values ('" + e.especieID + "','"
+				+ e.getNombreEspecie()+ "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Especie agregado");
@@ -337,21 +377,10 @@ public class ConexionDB {
 
 	}
 
-	public void setPropietarioCreado(Propietario p, Invernadero i) {
-		String pass = String.valueOf(ramndom.nextInt(1000000));
-		query = "insert into propietario (nombre,contrasenia) values ('" + p.getNombre() + "' ,'" + pass + "')";
-		try {
-			st.executeUpdate(query);
-			System.out.println("Propietario agregado");
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-
-	}
 
 	public void setCuidar(Cuidar c) {
-		query = "insert into cuidar (propietarioID,plantaID,invernaderoID) values ('" + c.getPropietarioID() + "' ,'"
-				+ c.getPlantaID() + "','" + c.getInvernaderoID() + "')";
+		query = "insert into cuidar values ('" + c.getInvernaderoID() + "' ,'"
+				+ c.getPlantaID() + "','" + c.getPropietarioID() + "')";
 		try {
 			st.executeUpdate(query);
 			System.out.println("Cuidar agregado");
@@ -375,10 +404,10 @@ public class ConexionDB {
 		query = "delete from planta where plantaID = '" + plantaID + "'";
 		try {
 			st.executeUpdate(query);
-			System.out.println("Planta eliminado");
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+
 	}
 
 }
