@@ -289,17 +289,6 @@ public class ConexionDB {
 
 	}
 
-	public void setCuidar(Propietario p, Planta p1, Invernadero i) {
-		query = "insert into cuidar (propietarioID,plantaID,invernaderoID) values ('" + p.getPropietarioID() + "' ,'"
-				+ p1.getId() + "','" + i.getInvernaderoID() + "')";
-		try {
-			st.executeUpdate(query);
-			System.out.println("Cuidar agregado");
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-
-	}
 
 	public void setCuidar(Cuidar c) {
 		query = "insert into cuidar (propietarioID,plantaID,invernaderoID) values ('" + c.getPropietarioID() + "' ,'"
