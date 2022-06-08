@@ -4,12 +4,12 @@ public class Propietario {
     
     int propietarioID;
     String nombre;
-    int inventarioID;
+   
 
     public Propietario(int propietarioID, String nombre, int inventarioID) {
         this.propietarioID = propietarioID;
         this.nombre = nombre;
-        this.inventarioID = inventarioID;
+
     }
 
     public int getPropietarioID() {
@@ -20,9 +20,7 @@ public class Propietario {
         return nombre;
     }
 
-    public int getInventarioID() {
-        return inventarioID;
-    }
+
 
     public void setPropietarioID(int propietarioID) {
         this.propietarioID = propietarioID;
@@ -32,7 +30,5 @@ public class Propietario {
         this.nombre = nombre;
     }   
 
-    public void setInventarioID(int inventarioID) {
-        this.inventarioID = inventarioID;
-    }
+
 }

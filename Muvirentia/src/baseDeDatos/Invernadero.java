@@ -5,11 +5,13 @@ public class Invernadero {
      int invernaderoID;
      String descripcion;
      int areaCultivo;
+     int propietarioID;
 
-        public Invernadero(int invernaderoID, String descripcion, int areaCultivo) {
+        public Invernadero(int invernaderoID, String descripcion, int areaCultivo,int propietario) {
             this.invernaderoID = invernaderoID;
             this.descripcion = descripcion;
             this.areaCultivo = areaCultivo;
+            this.propietarioID=propietario;
         }
 
         public int getInvernaderoID() {
@@ -24,6 +26,10 @@ public class Invernadero {
             return areaCultivo;
         }
 
+        public int getPropietario() {
+            return propietarioID;
+        }
+
         public void setInvernaderoID(int invernaderoID) {
             this.invernaderoID = invernaderoID;
         }   
@@ -35,6 +41,9 @@ public class Invernadero {
         public void setAreaCultivo(int areaCultivo) {
             this.areaCultivo = areaCultivo;
         }   
-        
+
+        public void setPropietarioID(int propietarioID) {
+            this.propietarioID = propietarioID;
+        } 
   
 }

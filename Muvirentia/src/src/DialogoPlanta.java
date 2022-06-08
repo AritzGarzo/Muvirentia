@@ -216,7 +216,7 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
                 Integer.parseInt(tfPlantaCantidad.getText()), Integer.parseInt(tfPlantaID.getText()),
                 Integer.parseInt(tfInvernaderoID.getText()));
         invernadero = new Invernadero(Integer.parseInt(tfInvernaderoID.getText()),
-                tfDescripcionInvernadero.getText(), Integer.parseInt(tfAreaCultivable.getText()));
+                tfDescripcionInvernadero.getText(), Integer.parseInt(tfAreaCultivable.getText()),Integer.parseInt(tfPropietarioID.getText()));
         propietario = new Propietario(Integer.parseInt(tfPropietarioID.getText()),
                 tfNombrePropietario.getText(), Integer.parseInt(tfInvernaderoID.getText()));
         cuidar = new Cuidar(Integer.parseInt(tfPlantaID.getText()),
@@ -246,8 +246,9 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
             Invernadero invernadero2, Propietario propietario2, Cuidar cuidar2) {
 
         conexion.setPlanta(planta2);
-        conexion.setInvernadero(invernadero2);
         conexion.setPropietario(propietario2, invernadero2);
+        conexion.setInvernadero(invernadero2);
+
         conexion.setCondicion(condicion2, planta2);
         conexion.setTiene(tiene2);
         conexion.setEspecie(especie2, planta2);
