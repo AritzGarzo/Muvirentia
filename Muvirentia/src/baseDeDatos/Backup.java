@@ -9,14 +9,14 @@ public class Backup {
 
         Process p = Runtime.getRuntime().exec("mysqldump -u root -p12345678aA@ -B -t muvirentia");
 
-        InputStream is = p.getInputStream();// Pedimos la entrada
-        FileOutputStream fos = new FileOutputStream(ruta+"backup_muvirentia.sql"); // creamos el archivo para le respaldo
-        byte[] buffer = new byte[1000]; // Creamos una variable de tipo byte para el buffer
+        InputStream is = p.getInputStream();
+        FileOutputStream fos = new FileOutputStream(ruta+"backup_muvirentia.sql"); 
+        byte[] buffer = new byte[1000];
 
-        int leido = is.read(buffer); // Devuelve el n�mero de bytes le�dos o -1 si se alcanz� el final del stream.
+        int leido = is.read(buffer);
         while (leido > 0) {
-            fos.write(buffer, 0, leido);// Buffer de caracteres, Desplazamiento de partida para empezar a escribir
-                                        // caracteres, N�mero de caracteres para escribir
+            fos.write(buffer, 0, leido);
+                                        
             leido = is.read(buffer);
         }
 
