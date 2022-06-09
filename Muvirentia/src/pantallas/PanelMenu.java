@@ -107,11 +107,11 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	private Component crearPanelListaPlantas() {
 		JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		// jlPlantas = new JList<>();
-		// jlPlantas.setListData(lPlantas.toArray(new Planta[0]));
-		// jlPlantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		 jlPlantas = new JList<>();
+		 jlPlantas.setListData(lPlantas.toArray(new FormularioAniadir[0]));
+		 jlPlantas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		// scroll.setViewportView(jlPlantas);
+		 scroll.setViewportView(jlPlantas);
 		return scroll;
 	}
 
@@ -153,7 +153,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 			case Controlador.ADD_PLANTA:
 				FormularioAniadir formularioAniadir = (FormularioAniadir) evt.getNewValue();
 				lPlantas.add(formularioAniadir);
-				// jlPlantas.setListData(lPlantas.toArray(new formularioAniadir[0]));
+				 jlPlantas.setListData(lPlantas.toArray(new FormularioAniadir[0]));
 				break;
 			case Controlador.DEL_PLANTA:
 				

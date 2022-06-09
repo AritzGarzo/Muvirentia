@@ -182,8 +182,8 @@ public class DialogoPlanta extends JDialog implements ActionListener, KeyListene
                 } else {
 
                     crearFormularioDeLosDatos();
-                    insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero,
-                            propietario, cuidar);
+                    //insertBaseDeDatos(planta, condicion, tiene, especie, haber, invernadero,
+                      //      propietario, cuidar);
                     this.dispose();
                 }
                 break;
