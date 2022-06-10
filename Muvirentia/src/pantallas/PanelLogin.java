@@ -45,7 +45,7 @@ public class PanelLogin implements ActionListener {
 		tNombre.setBackground(null);
 		
 		pPass = new JPasswordField();
-		pPass.setBorder(BorderFactory.createTitledBorder("Contrase�a: "));
+		pPass.setBorder(BorderFactory.createTitledBorder("Contraseña: "));
 		pPass.setBackground(null);
 		
 		bConfirm = new JButton("Confirmar");
