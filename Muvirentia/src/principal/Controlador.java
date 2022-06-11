@@ -22,7 +22,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Prope
 	public final static String PANEL_PRINCIPAL = "panel_principal", PANEL_LOGIN = "panel_login",
 			PANEL_GRAFICO = "panel_grafico", PANEL_MENU = "panel_menu", FORMULARIO = "formulario",
 			ADD_PLANTA = "add_planta", DEL_PLANTA = "del_planta", SISTEMA = "sistema", CONFIRMAR = "confirmar",
-			CANCELAR = "cancelar", APAGAR = "apagar";
+			CANCELAR = "cancelar", APAGAR = "apagar", GUARDAR_FORMULARIO="guardar_formulario";
 	PropertyChangeSupport conector;
 	Usuario usuario;
 
@@ -50,7 +50,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Prope
 			conector.firePropertyChange(PANEL_PRINCIPAL, null, usuario);
 			break;
 		case PANEL_LOGIN:
-			conector.firePropertyChange(PANEL_LOGIN,null,12);
+			conector.firePropertyChange(PANEL_LOGIN,false,true);
 			break;
 		case FORMULARIO:
 			MiDialogo dialogo = new MiDialogo(new JFrame(), "Formulario", true);

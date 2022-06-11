@@ -146,11 +146,10 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	
 	private void leerFormularios() {
 		String linea;
-		lFormularios.clear();
+		lFormularios = new ArrayList<>();
 		FormularioIncidencia f;
 		try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(FICHERO_FORMULARIOS))){
 			while((f=(FormularioIncidencia)in.readObject())!=null) {
-				if(f==null)lFormularios=new ArrayList<>();
 				lFormularios.add(f);
 			}
 		} catch (FileNotFoundException e) {
@@ -160,11 +159,6 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void enviarFormulario() {
-		// Por implementar
-		// pero puedes guardarlo
 	}
 
 	public JPanel getPanel() {
@@ -185,6 +179,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 					lFormularios.add(formulario);
 					jlFormularios.setListData(lFormularios.toArray(new FormularioIncidencia[0]));
 				}
+				guardarFormularios();
 				break;
 			case Controlador.ADD_PLANTA:
 				FormularioAniadir formularioAniadir = (FormularioAniadir) evt.getNewValue();
@@ -217,6 +212,8 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 							
 					}
 				}
+				break;
+			case Controlador.GUARDAR_FORMULARIO:
 				break;
 			default:
 		}
