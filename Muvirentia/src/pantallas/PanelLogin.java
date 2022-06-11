@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -17,7 +17,8 @@ import javax.swing.JTextField;
 import principal.Controlador;
 import src.Usuario;
 
-public class PanelLogin implements ActionListener {
+public class PanelLogin extends JFrame implements ActionListener {
+	private final static String NOMBRE="Investor",PASS="InvestToHelp";
 	JPanel panel;
 	JTextField tNombre;
 	JPasswordField pPass;
@@ -73,7 +74,14 @@ public class PanelLogin implements ActionListener {
 		String comando = e.getActionCommand();
 		switch(comando) {
 		case Controlador.CONFIRMAR:
-			conector.firePropertyChange(Controlador.CONFIRMAR,null,new Usuario(3,tNombre.getText(),pPass.getText()));
+			if(NOMBRE.equals(tNombre.getText()) && PASS.equals(pPass.getText())) {
+				conector.firePropertyChange(Controlador.CONFIRMAR,null,new Usuario(3,tNombre.getText(),pPass.getText()));
+			} else {
+				int opcion = JOptionPane.showConfirmDialog(this,"Usuario o contraseña introducida incorrecta",
+						"Información incorrecta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				tNombre.setText("");
+				pPass.setText("");
+			}
 			break;
 		case Controlador.CANCELAR:
 			conector.firePropertyChange(Controlador.CANCELAR, false, true);

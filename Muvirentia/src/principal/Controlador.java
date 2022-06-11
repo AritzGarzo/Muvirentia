@@ -63,8 +63,7 @@ public class Controlador implements ActionListener,ListSelectionListener, Proper
 			if (formularioAniadir!=null) conector.firePropertyChange(ADD_PLANTA, null, formularioAniadir);
 			break;
 		case DEL_PLANTA:
-		conector.firePropertyChange(DEL_PLANTA, null, null);
-
+			conector.firePropertyChange(DEL_PLANTA, null, null);
 			break;
 		case SISTEMA:
 			conector.firePropertyChange(SISTEMA, null, 12);
