@@ -4,7 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +31,7 @@ import src.FormularioIncidencia;
 import src.Usuario;
 
 public class PanelMenu extends JFrame implements PropertyChangeListener {
-	// private final static String FICHERO_FORMULARIOS = "formularios.dat";
+	private final static String FICHERO_FORMULARIOS = "formularios.dat";
 	Controlador controlador;
 	JPanel panel;
 	JButton bHome, bFormulario, bGrafico, bAddPlanta, bDelPlanta, bSistema;
@@ -42,7 +47,8 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 
 	public PanelMenu(Controlador controlador, Usuario usuario) {
 		this.controlador = controlador;
-		lFormularios = new ArrayList<>();
+		leerFormularios();
+		this.usuario = usuario;
 		lPlantas = new ArrayList<>();
 		controlador.addListener(this);
 		conexionDB = new ConexionDB();
@@ -124,6 +130,36 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 
 		scroll.setViewportView(jlFormularios);
 		return scroll;
+	}
+	
+	private void guardarFormularios() {
+		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FICHERO_FORMULARIOS))){
+			for(FormularioIncidencia f:lFormularios) {
+				out.writeObject(f);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void leerFormularios() {
+		String linea;
+		lFormularios.clear();
+		FormularioIncidencia f;
+		try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(FICHERO_FORMULARIOS))){
+			while((f=(FormularioIncidencia)in.readObject())!=null) {
+				if(f==null)lFormularios=new ArrayList<>();
+				lFormularios.add(f);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void enviarFormulario() {

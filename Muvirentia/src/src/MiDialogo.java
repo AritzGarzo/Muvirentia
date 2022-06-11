@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +23,8 @@ public class MiDialogo extends JDialog implements ActionListener {
 	JLabel lbNombre, lbDescripcion;
 	JTextField tNombre, tDescripcion;
 	FormularioIncidencia formulario;
-	JRadioButton rSi,rSensores,rValvula;
+	JRadioButton rSi;
+	JCheckBox rSensores,rValvula;
 
 	public MiDialogo(JFrame ventana, String titulo, boolean modo) {
 		super(ventana, titulo, modo);
@@ -83,10 +85,10 @@ public class MiDialogo extends JDialog implements ActionListener {
 		pInvolucra.setBackground(null);
 
 		ButtonGroup bgInvolucra = new ButtonGroup();
-		rSensores = new JRadioButton("Sensores");
+		rSensores = new JCheckBox("Sensores");
 		rSensores.setSelected(false);
-		rValvula = new JRadioButton("Valvula");
-		rValvula.setSelected(true);
+		rValvula = new JCheckBox("Valvula");
+		rValvula.setSelected(false);
 
 		pInvolucra.add(rSensores);
 		pInvolucra.add(rValvula);

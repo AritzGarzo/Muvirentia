@@ -76,6 +76,9 @@ public class Principal extends JFrame implements PropertyChangeListener {
 			controlador.setUsuario(usuario);
 			cambiarPanel(crearPanelPrincipal(usuario));
 			break;
+		case Controlador.PANEL_LOGIN:
+			cambiarPanel(crearPanelLogin(usuario));
+			break;
 		case Controlador.PANEL_MENU:
 			cambiarPanel(crearPanelMenu(usuario));
 			break;
