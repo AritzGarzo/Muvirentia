@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,10 +20,10 @@ import javax.swing.ListSelectionModel;
 
 import baseDeDatos.Backup;
 import baseDeDatos.ConexionDB;
-
 import principal.Controlador;
 import src.FormularioAniadir;
 import src.FormularioIncidencia;
+import src.Usuario;
 
 public class PanelMenu extends JFrame implements PropertyChangeListener {
 	// private final static String FICHERO_FORMULARIOS = "formularios.dat";
@@ -38,9 +37,10 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	boolean sistema = true;// true = sistema encendido | false = sistema apagado
 	ConexionDB conexionDB;
 	Backup backup;
+	Usuario usuario;
 
 
-	public PanelMenu(Controlador controlador) {
+	public PanelMenu(Controlador controlador, Usuario usuario) {
 		this.controlador = controlador;
 		lFormularios = new ArrayList<>();
 		lPlantas = new ArrayList<>();
@@ -70,7 +70,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 		bGrafico.setActionCommand(Controlador.PANEL_GRAFICO);
 		bGrafico.addActionListener(controlador);
 
-		bAddPlanta = new JButton("Aniadir planta");
+		bAddPlanta = new JButton("Anadir planta");
 		bAddPlanta.setActionCommand(Controlador.ADD_PLANTA);
 		bAddPlanta.addActionListener(controlador);
 
@@ -162,7 +162,7 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 				break;
 			case Controlador.SISTEMA:
 				opcion = JOptionPane.showConfirmDialog(this,
-						((sistema) ? "Â¿Quieres apagar el sistema?" : "Â¿Quieres encender el sistema?"),
+						((sistema) ? "¿Quieres apagar el sistema?" : "¿Quieres encender el sistema?"),
 						"Estado del sistema", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 				if (sistema) {// sistema encendido para apagar

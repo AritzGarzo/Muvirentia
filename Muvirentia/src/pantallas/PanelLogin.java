@@ -27,7 +27,8 @@ public class PanelLogin extends JFrame implements ActionListener {
 	Controlador controlador;
 	PropertyChangeSupport conector;
 	
-	public PanelLogin(Controlador controlador) {
+	public PanelLogin(Controlador controlador,Usuario usuario) {
+		this.usuario = usuario;
 		this.controlador = controlador;
 		conector = new PropertyChangeSupport(this);
 		conector.addPropertyChangeListener(controlador);
@@ -36,16 +37,14 @@ public class PanelLogin extends JFrame implements ActionListener {
 		crearPanel();
 	}
 	
-	public void setUsuario(Usuario usuario) {this.usuario = usuario;}
-	
 	//---
 	
 	public void crearPanel() {		
-		tNombre = new JTextField();
+		tNombre = new JTextField((usuario==null)?"":usuario.getNombre());
 		tNombre.setBorder(BorderFactory.createTitledBorder("Nombre: "));
 		tNombre.setBackground(null);
 		
-		pPass = new JPasswordField();
+		pPass = new JPasswordField((usuario==null)?"":usuario.getContrasena());
 		pPass.setBorder(BorderFactory.createTitledBorder("ContraseÃ±a: "));
 		pPass.setBackground(null);
 		
@@ -75,7 +74,7 @@ public class PanelLogin extends JFrame implements ActionListener {
 		switch(comando) {
 		case Controlador.CONFIRMAR:
 			if(NOMBRE.equals(tNombre.getText()) && PASS.equals(pPass.getText())) {
-				conector.firePropertyChange(Controlador.CONFIRMAR,null,new Usuario(3,tNombre.getText(),pPass.getText()));
+				conector.firePropertyChange(Controlador.CONFIRMAR,null,new Usuario(1,tNombre.getText(),pPass.getText()));
 			} else {
 				int opcion = JOptionPane.showConfirmDialog(this,"Usuario o contraseña introducida incorrecta",
 						"Información incorrecta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);

@@ -31,6 +31,7 @@ public class Controlador implements ActionListener,ListSelectionListener, Proper
 			CANCELAR="cancelar",
 			APAGAR="apagar";
 	PropertyChangeSupport conector;
+	Usuario usuario;
 
 	
 	public Controlador() {
@@ -45,10 +46,15 @@ public class Controlador implements ActionListener,ListSelectionListener, Proper
 		conector.removePropertyChangeListener(listener);
 	}
 	
+	public void setUsuario(Usuario usuario) {this.usuario=usuario;}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
 		switch(comando) {
+		case PANEL_PRINCIPAL:
+			conector.firePropertyChange(PANEL_PRINCIPAL, null, usuario);
+			break;
 		case FORMULARIO:
 			MiDialogo dialogo = new MiDialogo(new JFrame(),"Formulario",true);
 			FormularioIncidencia formulario = dialogo.getFormulario();
