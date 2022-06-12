@@ -31,7 +31,7 @@ import src.FormularioIncidencia;
 import src.Usuario;
 
 public class PanelMenu extends JFrame implements PropertyChangeListener {
-	private final static String FICHERO_FORMULARIOS = "formularios.dat";
+	private final static String FICHERO_FORMULARIOS = "./formularios.dat";
 	Controlador controlador;
 	JPanel panel;
 	JButton bHome, bFormulario, bGrafico, bAddPlanta, bDelPlanta, bSistema;
@@ -145,7 +145,6 @@ public class PanelMenu extends JFrame implements PropertyChangeListener {
 	}
 	
 	private void leerFormularios() {
-		String linea;
 		lFormularios = new ArrayList<>();
 		FormularioIncidencia f;
 		try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(FICHERO_FORMULARIOS))){
