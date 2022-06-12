@@ -1,6 +1,8 @@
 package src;
 
-public class FormularioIncidencia {
+import java.io.Serializable;
+
+public class FormularioIncidencia implements Serializable {
 
 	String nombre, descripcion;
 	boolean intento, sensores, valvula;
