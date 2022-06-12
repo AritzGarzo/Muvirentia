@@ -75,6 +75,10 @@ public class PanelLogin extends JFrame implements ActionListener {
 		case Controlador.CONFIRMAR:
 			if(NOMBRE.equals(tNombre.getText()) && PASS.equals(pPass.getText())) {
 				conector.firePropertyChange(Controlador.CONFIRMAR,null,new Usuario(1,tNombre.getText(),pPass.getText()));
+			} else if (NOMBRE.equals(tNombre.getText()) && !PASS.equals(pPass.getText())){
+				int opcion = JOptionPane.showConfirmDialog(this,"Contraseña introducida incorrecta",
+						"Información incorrecta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				pPass.setText("");
 			} else {
 				int opcion = JOptionPane.showConfirmDialog(this,"Usuario o contraseña introducida incorrecta",
 						"Información incorrecta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
