@@ -1,10 +1,12 @@
 package principal;
 
 import java.awt.CardLayout;
+import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,6 +27,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		this.controlador = controlador;
 		controlador.addListener(this);
 
+		this.setIconImage(new ImageIcon(getClass().getResource("/icono/MUV-icon.png")).getImage());
 		this.setSize(1000, 600);
 		this.setLocation(200, 100);
 		panelVisual = new JPanel(new CardLayout());
