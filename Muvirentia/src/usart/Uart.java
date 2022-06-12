@@ -50,11 +50,12 @@ public class Uart {
 					while (true) {
 						// preset=getPreset();
 
-						uart.enviar(estado);
+						uart.enviar((PanelPrincipal.isValvula())?"on":"off");
 						System.out.println("hascodeuart: " + estado.hashCode());
 						System.out.println("hascode Uart.preset: " + Uart.estado.hashCode());
 						// printea la clase preset
 						System.out.println(i++ + " " + estado);
+						uart.enviar("receive");
 						uart.leer();
 						// Thread.sleep(1000);
 
@@ -71,34 +72,38 @@ public class Uart {
 
 	}
 
-	public void enviar(String[] datos) {
+	public void enviar(String datos) {
 		// determine which serial port to use
 
 		byte bD[] = new byte[4];
 
-		datos = preset.getTemperatura();
-
+		/*
+		datos = ((PanelPrincipal.isValvula())?"on":"off");
+		
 		// Convert Integer number to byte value
-		for (int i = 0; i < datos.length; i++)
-			bD[i] = datos[i].byteValue();
+		for (int i = 0; i < chars.length; i++)
+			bD[i] = chars[i];
+		*/
 
-		puerto.writeBytes(bD, datos.length);
+		puerto.writeBytes(datos.getBytes(), datos.length());
 
 	}
 
 	public void leer() {
+		byte bD[] = new byte[12];
+//		int dato;
 
-		byte bD[] = new byte[1];
-		int dato;
-
-		puerto.readBytes(bD, 1);
-
+		puerto.readBytes(bD, 12);
+		//recoge valor humedad,temperatura,luz
+		String info = bD.toString();
+		PanelPrincipal.setValores(info);
+		/*
 		dato = (bD[0] - 48);
 
 		if (dato == 1) {
 			preset.setPersiana(0);
 		}
-
+		*/
 	}
 
 
