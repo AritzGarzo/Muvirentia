@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import pantallas.PanelLogin;
@@ -81,6 +82,10 @@ public class Principal extends JFrame implements PropertyChangeListener {
 			break;
 		case Controlador.PANEL_MENU:
 			cambiarPanel(crearPanelMenu(usuario));
+			break;
+		case Controlador.PANEL_GRAFICO:
+			JOptionPane.showConfirmDialog(this,"Este elemento no está implementado todavía", "Elemento por incrementar",
+					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 			break;
 		case Controlador.APAGAR:
 			Principal.this.dispose();

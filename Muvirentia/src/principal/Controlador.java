@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -51,6 +52,9 @@ public class Controlador implements ActionListener, ListSelectionListener, Prope
 			break;
 		case PANEL_LOGIN:
 			conector.firePropertyChange(PANEL_LOGIN,false,true);
+			break;
+		case PANEL_GRAFICO:
+			conector.firePropertyChange(PANEL_GRAFICO,false,true);
 			break;
 		case FORMULARIO:
 			MiDialogo dialogo = new MiDialogo(new JFrame(), "Formulario", true);
