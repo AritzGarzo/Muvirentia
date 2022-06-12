@@ -1,7 +1,6 @@
 package principal;
 
 import java.awt.CardLayout;
-import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
