@@ -10,10 +10,11 @@ public class Uart {
 	static String estado;
 	static String datosEnt;
 	SerialPort puerto;
+	String s;
 
 	public Uart() {
 		// this.preset=preset;
-
+		
 		SerialPort puertos[] = SerialPort.getCommPorts();
 		System.out.println("Select a port:");
 		int i = 1;
@@ -48,16 +49,16 @@ public class Uart {
 
 					System.out.println("inicio");
 					while (true) {
-						// preset=getPreset();
-
-						uart.enviar((PanelPrincipal.isValvula())?"on":"off");
-						System.out.println("hascodeuart: " + estado.hashCode());
-						System.out.println("hascode Uart.preset: " + Uart.estado.hashCode());
-						// printea la clase preset
-						System.out.println(i++ + " " + estado);
-						uart.enviar("receive");
-						uart.leer();
-						// Thread.sleep(1000);
+						
+						String estado =(PanelPrincipal.isValvula())?"1":"0";
+						System.out.println(estado);
+						uart.enviar(estado);
+						
+						
+						uart.enviar("r");
+						String infos=uart.leer();
+						//System.out.print(infos);
+						 Thread.sleep(100);
 
 					}
 				} catch (Exception e) {
@@ -73,30 +74,37 @@ public class Uart {
 	}
 
 	public void enviar(String datos) {
-		// determine which serial port to use
 
-		byte bD[] = new byte[4];
-
-		/*
-		datos = ((PanelPrincipal.isValvula())?"on":"off");
-		
-		// Convert Integer number to byte value
-		for (int i = 0; i < chars.length; i++)
-			bD[i] = chars[i];
-		*/
-
-		puerto.writeBytes(datos.getBytes(), datos.length());
+		puerto.writeBytes(datos.getBytes(java.nio.charset.StandardCharsets.UTF_8), datos.getBytes().length);
 
 	}
 
-	public void leer() {
-		byte bD[] = new byte[12];
+	public String leer() {
+		byte bD[] = new byte[13];
+		
+		
 //		int dato;
 
-		puerto.readBytes(bD, 12);
+		puerto.readBytes(bD, 13);
+		
 		//recoge valor humedad,temperatura,luz
-		String info = bD.toString();
-		PanelPrincipal.setValores(info);
+		String str = new String(bD, java.nio.charset.StandardCharsets.UTF_8);
+		//System.out.println(str);
+		
+		if(s == null) {
+			s = str;
+		}else if(str.contains(".")) {
+			str = str.replace(".", "");
+			System.out.println(str);
+			if(str.charAt(0)=='t') PanelPrincipal.setValores(str);
+			s = null;
+		}else {
+			
+			s = s.concat(str);
+		}
+		
+		return str;
+		
 		/*
 		dato = (bD[0] - 48);
 

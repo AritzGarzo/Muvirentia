@@ -69,9 +69,9 @@ public class PanelPrincipal extends JFrame implements ActionListener {
 			// dejar solo el numero en bytes
 			valores[i] = valores[i].substring(1);
 		}
-		setTemperatura(Integer.parseInt(valores[0])-48);
-		setHumedad(Integer.parseInt(valores[1])-48);
-		setLuz(Integer.parseInt(valores[1])-48);
+		setTemperatura(Integer.parseInt(valores[0]));
+		setHumedad(Integer.parseInt(valores[1]));
+		setLuz(Integer.parseInt(valores[2]));
 	}
 	
 	private static void setTemperatura(int valor) {
