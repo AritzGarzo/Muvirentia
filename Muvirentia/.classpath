@@ -7,6 +7,6 @@
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.29.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Aritz/Desktop/MUN/2_Urtea/POPBL4/Aplicacion/Muvirentia/Muvirentia/lib/jSerialComm-2.8.0.jar"/>
+	<classpathentry kind="lib" path="F:/001UNI/2.maila/2.Semestre/pblVisual/Muvirentia/Muvirentia/lib/jSerialComm-2.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
