@@ -14,13 +14,16 @@ import pantallas.PanelLogin;
 import pantallas.PanelMenu;
 import pantallas.PanelPrincipal;
 import src.Usuario;
+import usart.Uart;
 
 public class Principal extends JFrame implements PropertyChangeListener {
 	JPanel panelVisual;
 	Controlador controlador;
 	AbstractAction acc;
 	Usuario usuario;
-	
+	static Uart uart;
+	static String estado;
+
 	public Principal(Controlador controlador) {
 		super("Muvirentia");
 		this.controlador = controlador;
@@ -34,28 +37,28 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		cambiarPanel(crearPanelLogin(usuario));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		//ey
+		// ey
 	}
-//prueba
+	// prueba
 	// ---------------------------paneles---------------------------
 
 	private JPanel crearPanelLogin(Usuario usuario) {
 		JPanel panel;
-		PanelLogin panelLogin = new PanelLogin(controlador,usuario);
+		PanelLogin panelLogin = new PanelLogin(controlador, usuario);
 		panel = panelLogin.getPanel();
 		return panel;
 	}
-		
+
 	private JPanel crearPanelMenu(Usuario usuario) {
 		JPanel panel;
-		PanelMenu panelMenu = new PanelMenu(controlador,usuario);
+		PanelMenu panelMenu = new PanelMenu(controlador, usuario);
 		panel = panelMenu.getPanel();
 		return panel;
 	}
-	
+
 	private JPanel crearPanelPrincipal(Usuario usuario) {
 		JPanel panel;
-		PanelPrincipal panelPrincipal = new PanelPrincipal(controlador,usuario);
+		PanelPrincipal panelPrincipal = new PanelPrincipal(controlador, usuario);
 		panel = panelPrincipal.getPanel();
 		return panel;
 	}
@@ -74,25 +77,26 @@ public class Principal extends JFrame implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		String propiedad = evt.getPropertyName();
 		switch (propiedad) {
-		case Controlador.PANEL_PRINCIPAL:
-			usuario = (Usuario)evt.getNewValue();
-			controlador.setUsuario(usuario);
-			cambiarPanel(crearPanelPrincipal(usuario));
-			break;
-		case Controlador.PANEL_LOGIN:
-			cambiarPanel(crearPanelLogin(usuario));
-			break;
-		case Controlador.PANEL_MENU:
-			cambiarPanel(crearPanelMenu(usuario));
-			break;
-		case Controlador.PANEL_GRAFICO:
-			JOptionPane.showConfirmDialog(this,"Este elemento no está implementado todavía", "Elemento por incrementar",
-					JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
-			break;
-		case Controlador.APAGAR:
-			Principal.this.dispose();
-			break;
-		default:
+			case Controlador.PANEL_PRINCIPAL:
+				usuario = (Usuario) evt.getNewValue();
+				controlador.setUsuario(usuario);
+				cambiarPanel(crearPanelPrincipal(usuario));
+				break;
+			case Controlador.PANEL_LOGIN:
+				cambiarPanel(crearPanelLogin(usuario));
+				break;
+			case Controlador.PANEL_MENU:
+				cambiarPanel(crearPanelMenu(usuario));
+				break;
+			case Controlador.PANEL_GRAFICO:
+				JOptionPane.showConfirmDialog(this, "Este elemento no estï¿½ implementado todavï¿½a",
+						"Elemento por incrementar",
+						JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+				break;
+			case Controlador.APAGAR:
+				Principal.this.dispose();
+				break;
+			default:
 		}
 	}
 
@@ -104,5 +108,7 @@ public class Principal extends JFrame implements PropertyChangeListener {
 		Controlador controlador = new Controlador();
 		Principal programa = new Principal(controlador);
 
+		uart = new Uart();
+		uart.start(uart, estado);
 	}
 }

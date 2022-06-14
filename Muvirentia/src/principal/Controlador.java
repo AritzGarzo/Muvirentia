@@ -68,6 +68,7 @@ public class Controlador implements ActionListener, ListSelectionListener, Prope
 		case ADD_PLANTA:
 			DialogoPlanta dialogoPlanta = new DialogoPlanta(new JFrame(), "Agregar Planta", true);
 			FormularioAniadir formularioAniadir = dialogoPlanta.getFormulario();
+			
 			if (formularioAniadir != null)
 				conector.firePropertyChange(ADD_PLANTA, null, formularioAniadir);
 			break;

@@ -311,6 +311,7 @@ public class ConexionDB {
 
 	public boolean invernaderoCreado(Invernadero i){
 		query = "select * from invernadero where invernaderoID = '" + i.getInvernaderoID() + "'";
+
 		try {
 			resultado = st.executeQuery(query);
 			if (resultado.next()) {
@@ -321,6 +322,7 @@ public class ConexionDB {
 		}
 		return false;
 	}
+
 
 	// para hacer insert en la tabla invernadero si la id NO está repetido
 	public void setInvernaderoNoCreado(Invernadero i) {
